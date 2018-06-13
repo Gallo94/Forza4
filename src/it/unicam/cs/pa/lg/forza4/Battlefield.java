@@ -7,17 +7,42 @@ import java.io.PrintStream;
 
 public class Battlefield {
 	
-	public static final int DEFAULT_WIDTH = 7;
-	public static final int DEFAULT_HEIGHT = 6;
+	public static final int MAX_DISCS = 42;
+	public static final int ROWS = 7;
+	public static final int COLUMNS = 6;
 	private Cell[][] cells;
-	private int disc;
+	private int disc_counter;
 	
 	public Battlefield()
 	{
-		this.cells = new Cell[DEFAULT_WIDTH][DEFAULT_HEIGHT];
-		printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		this.cells = new Cell[ROWS][COLUMNS];
+		this.disc_counter = 0;
+		
+		printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), ROWS, COLUMNS);
 	}
 	
+	public boolean addDisc(Disc disc, final int column)
+	{
+		for (int i = ROWS - 1; i >= 0; i--)
+		{
+			Cell cell = this.cells[column][i];
+			if (cell.isEmpty())
+			{
+				cell.setDisc(disc);
+				this.disc_counter++;
+			}
+			else continue;
+		}
+		
+		return false;
+	}
+	
+	public boolean isCompleted()
+	{
+		return disc_counter == MAX_DISCS;
+	}
+	
+	////////////////////////////////////////////////////////////////////////
 	public static void printField(PrintStream writer, int width, int height) {
 		printColumnsHeader(writer, width);
 		for( int i=0; i<height ; i++ ) {
