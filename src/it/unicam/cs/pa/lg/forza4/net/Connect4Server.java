@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 
 public class Connect4Server
 {
-	public final static int PORT = 9000;
+	public static final int PORT = 9000;
 	private ExecutorService executor = Executors.newCachedThreadPool();
 	
 	public void start()
@@ -16,6 +16,7 @@ public class Connect4Server
 		try
 		{
 			ServerSocket server = new ServerSocket(PORT);
+			System.out.println("Listening on port number " + server.getLocalPort());
 			System.out.println("Accept connections...");
 			Socket client = server.accept(); // Blocking
 			System.out.println("OK!");
