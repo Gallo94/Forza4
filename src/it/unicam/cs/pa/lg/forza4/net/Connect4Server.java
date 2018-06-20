@@ -3,12 +3,9 @@ package it.unicam.cs.pa.lg.forza4.net;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import it.unicam.cs.pa.lg.forza4.Grid;
 import it.unicam.cs.pa.lg.forza4.PlayerChannel;
-import sun.tools.tree.ThisExpression;
 
 public class Connect4Server
 {
