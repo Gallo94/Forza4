@@ -12,7 +12,7 @@ public class Cell
 		this.x = INVALID_COORD;
 		this.y = INVALID_COORD;
 		
-		System.out.println("x: " + this.x + ", y: " + this.y);
+//		System.out.println("x: " + this.x + ", y: " + this.y);
 	}
 	
 	public void setDisc(Player player, byte x, byte y)

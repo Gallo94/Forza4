@@ -16,17 +16,19 @@ public class PlayerChannel
 	private Player player;
 	
 
-	public PlayerChannel(Socket socket)
+	public PlayerChannel(Socket socket, Grid grid)
 	{
 		this.socket = socket;
-		this.grid = new Grid();
-		Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);
+		this.grid = grid;
+		
+//		Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);
 
 		this.player = new Player(grid, socket.getInetAddress());
 			
 		try
 		{
 			processPlayerInput();
+			
 			Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);
 
 			this.socket.close();
