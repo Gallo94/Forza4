@@ -1,9 +1,9 @@
 package it.unicam.cs.pa.lg.forza4;
 
-public enum MessageType
+public class MessageType
 {
-	PLAYER_MOVE,
-	PLAYER_ONE_TURN,
-	PLAYER_TWO_TURN,
-	GAME_OVER        // 1 p1 won; 2 p2 won; 3 draw
+	public static final byte PLAYER_MOVE = 0;
+	public static final byte PLAYER_ONE_TURN = 1;
+	public static final byte PLAYER_TWO_TURN = 2;
+	public static final byte GAME_OVER = 3; 
 }

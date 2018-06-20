@@ -7,6 +7,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
+import it.unicam.cs.pa.lg.forza4.MessageType;
+
 public class Connect4Client
 {
 	private static int PORT = 9001;
@@ -17,7 +19,9 @@ public class Connect4Client
 	public Connect4Client(final String server, final int PORT) throws IOException
 	{
 		socket = new Socket(server, PORT);		
-		in = socket.getInputStream();
 		out = socket.getOutputStream();
+		
+		byte[] buf = new byte[] {MessageType.PLAYER_MOVE, 0};
+		out.write(buf);
 	}
 }

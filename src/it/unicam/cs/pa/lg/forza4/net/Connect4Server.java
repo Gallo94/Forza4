@@ -6,6 +6,8 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import it.unicam.cs.pa.lg.forza4.PlayerChannel;
+
 public class Connect4Server
 {
 	public final static int PORT = 9001;
@@ -46,7 +48,7 @@ public class Connect4Server
 		public void run()
 		{
 			System.out.println("Connected with " + client.getInetAddress().toString());
-//			new C4ServerSession(clientSocket);
+			new PlayerChannel(this.client);
 		}
 	}
 }

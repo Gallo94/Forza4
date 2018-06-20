@@ -4,6 +4,6 @@ public class Match {
 
 	public static void main(String[] args)
 	{
-		Battlefield bf = new Battlefield();
+		Grid bf = new Grid();
 	}
 }

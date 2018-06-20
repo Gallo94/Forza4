@@ -1,23 +1,27 @@
 package it.unicam.cs.pa.lg.forza4;
 
-public class Cell {
-	
-	private Disc disc;
-	
-	public Cell() { this.disc = null; }
-	
-	public void setDisc(Disc disc)
-	{ 
-		this.disc = disc;
-	}
-	
-	public Disc getDisc()
+public class Cell
+{
+	public static final byte INVALID_COORD = -1;
+	Player player;
+	byte x, y;
+		
+	public Cell()
 	{
-		return this.disc;
+		this.player = null;
+		this.x = INVALID_COORD;
+		this.y = INVALID_COORD;
+		
+		System.out.println("x: " + this.x + ", y: " + this.y);
 	}
-			
+	
+	public void setDisc(Player player, byte x, byte y)
+	{ 
+		this.player = player;
+	}
+				
 	public boolean isEmpty()
 	{
-		return this.disc == null;
+		return this.player == null;
 	}
 }
