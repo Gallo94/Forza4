@@ -5,7 +5,7 @@ import java.net.UnknownHostException;
 
 public class Connect4ClientMain 
 {
-	public static void main(String[] argc) throws UnknownHostException, IOException
+	public static void main(String[] argc) throws UnknownHostException, IOException, ClassNotFoundException
 	{
 		Connect4Client client = new Connect4Client("127.0.0.1", 9001);
 	}

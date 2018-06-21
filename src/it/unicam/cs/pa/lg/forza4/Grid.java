@@ -190,7 +190,7 @@ public class Grid {
 		for (int i = 0; i < width; i++)
 		{
 			writer.print("|");
-			writer.print(" " + (!grid.cells[row][i].isEmpty() ? "R" : " ") + " ");
+			writer.print(" " + (!grid.cells[row][i].isEmpty() ? grid.cells[row][i].getPlayer().getId() : " ") + " ");
 		}
 		writer.println("|");
 	}

@@ -52,7 +52,12 @@ public class Connect4Server
 		public void run()
 		{
 			System.out.println("Connected with " + client.getInetAddress().toString());
-			new PlayerChannel(this.client, this.grid);
+			try {
+				new PlayerChannel(this.client, this.grid);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

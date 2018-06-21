@@ -4,27 +4,30 @@ import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
-
+import it.unicam.cs.pa.lg.forza4.Message;
 public class PlayerChannel
 {	
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
 	private Socket socket;
 	private Grid grid;
 	private Player player;
+	
+	private volatile static byte numPlayer = 0;
 
-	public PlayerChannel(Socket socket, Grid grid)
+	public PlayerChannel(Socket socket, Grid grid) throws IOException
 	{
 		this.socket = socket;
 		this.grid = grid;
 		
-//		Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);
-
-		this.player = new Player(grid, socket.getInetAddress());
+		numPlayer++;
+		this.player = new Player(grid, socket.getInetAddress(), numPlayer);
+		sendPlayerId();	
 			
 		try
 		{
@@ -43,25 +46,21 @@ public class PlayerChannel
 
 			this.socket.close();
 		}
-		catch (IOException e)
+		catch (IOException | ClassNotFoundException e)
 		{
 			e.printStackTrace();
 		}
 	}
 	
 	// Lettura del messaggio dal client
-	private byte[] readMessage() throws IOException
+	private Message readMessage() throws IOException, ClassNotFoundException
 	{
-		byte[] buf = new byte[MAX_MESSAGE_LEN];
+		Message message = null;
 
 		try
 		{
-			InputStream in = socket.getInputStream();
-			int bytes_read = 0;
-			while (bytes_read < MAX_MESSAGE_LEN)
-			{
-				bytes_read = in.read(buf);
-			}
+			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+			message = (Message) in.readObject();
 		}
 		catch (IOException e)
 		{
@@ -69,28 +68,28 @@ public class PlayerChannel
 			throw e;
 		}
 
-		return buf;
+		return message;
 	}
 	
 	// Scrive messaggio del Server per il Client
 	private void writeMessage(final byte type, final byte data) throws IOException
 	{
-		OutputStream out = socket.getOutputStream();
-		byte[] buf = new byte[] { type, data };
-		out.write(buf);
+		Message message = new Message(type, data);
+		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+		out.writeObject(message);
 	}
 	
 	// Elaborazione comandi del Client sul Server
-	private void processPlayerInput() throws IOException
+	private void processPlayerInput() throws IOException, ClassNotFoundException
 	{
-		byte[] message = readMessage();
+		Message message = readMessage();
 		
-		switch (message[0])
+		switch (message.getType())
 		{
 		case MessageType.PLAYER_MOVE:
 		{
 			System.out.println("Player Move");
-			makeMove(message[1]);
+			makeMove(message.getData());
 			
 			break;
 		}
@@ -107,7 +106,12 @@ public class PlayerChannel
 			return;
 		}
 		
-		writeMessage(MessageType.PLAYER_ONE_TURN, (byte) 0);
+		writeMessage(MessageType.PLAYER_TURN, (byte) 0);
+	}
+	
+	private void sendPlayerId() throws IOException
+	{
+		writeMessage(MessageType.PLAYER_ID, numPlayer);
 	}
 	
 	private void makeMove(byte col)
