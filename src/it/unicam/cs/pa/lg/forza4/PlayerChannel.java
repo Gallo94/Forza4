@@ -27,9 +27,16 @@ public class PlayerChannel
 			
 		try
 		{
-			processPlayerInput();
-			
-			Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);
+			while (true)
+			{
+				processPlayerInput();
+				Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);
+				if (grid.won)
+				{
+					System.out.println("WON");
+					break;
+				}
+			}
 
 			this.socket.close();
 		}
@@ -42,12 +49,21 @@ public class PlayerChannel
 	// Lettura del messaggio dal client
 	private byte[] readMessage() throws IOException
 	{
-		InputStream in = socket.getInputStream();
 		byte[] buf = new byte[MAX_MESSAGE_LEN];
-		int bytes_read = in.read(buf);
-		if (bytes_read != MAX_MESSAGE_LEN)
+
+		try
+		{
+			InputStream in = socket.getInputStream();
+			int bytes_read = 0;
+			while (bytes_read < MAX_MESSAGE_LEN)
+			{
+				bytes_read = in.read(buf);
+			}
+		}
+		catch (IOException e)
 		{
 			System.out.println("PlayerChannel: Wrong read message");
+			throw e;
 		}
 
 		return buf;

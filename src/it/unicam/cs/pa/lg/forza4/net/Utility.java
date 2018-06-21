@@ -2,6 +2,7 @@ package it.unicam.cs.pa.lg.forza4.net;
 
 import java.util.Random;
 
+// TODO
 public class Utility
 {
 	private final int NO_TURN	  = 0;
@@ -14,10 +15,10 @@ public class Utility
 	
 	private final int GAME_LEVEL = 3;
 	
-	/* Descrive di chi è il turno */
+	/* Descrive di chi ï¿½ il turno */
 	private int whoTurn = NO_TURN;
 	
-	/* Descrive chi inizierà a giocare */
+	/* Descrive chi inizierï¿½ a giocare */
 	private int firstTurn = NO_TURN;
 	
 	public void chooseFirstPlayer()

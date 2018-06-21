@@ -9,6 +9,7 @@ public class Grid {
 	public static final int COLUMNS = 7;
 	private Cell[][] cells;
 	private int disc_counter;
+	public boolean won;
 	
 	public Grid()
 	{
@@ -27,8 +28,13 @@ public class Grid {
 			Cell cell = this.cells[i][col];
 			if (cell.isEmpty())
 			{
-				cell.setDisc(player, (byte)i, col);
+				cell.setPlayer(player);
+				cell.setRow((byte)i);
+				cell.setCol(col);
+				won = checkWin((byte)i, col);
+				
 				this.disc_counter++;
+				
 				return true;
 			}
 			else continue;
@@ -42,6 +48,82 @@ public class Grid {
 		return disc_counter == MAX_DISCS;
 	}
 	
+	public boolean isIndexInBound(final int row, final int col)
+	{
+		return (row >= 0 && row < ROWS) && (col >= 0 && col < COLUMNS);
+	}
+	
+	public boolean checkWin(final int row, final int col)
+	{	
+
+		boolean ret;
+		
+		ret  =  checkVerticalWin(row, col)
+		     || checkHorizontalWin(row, col);
+				
+		return ret;
+	}
+	
+	private boolean checkVerticalWin(final int row, final int col)
+	{
+		Cell lastCell = this.cells[row][col];
+
+		// Vertical check
+		int numDisc = 1;
+		for (int i = 1; i <= 3; i++)
+		{
+			Cell cell = this.cells[row - i][col];
+			if (lastCell.getPlayer() == cell.getPlayer())
+			{
+				numDisc++;
+				if (numDisc == 4)
+					return true;
+			}
+			else
+				return false;
+		}
+		
+		return false;
+	}
+	
+	private boolean checkHorizontalWin(final int row, final int col)
+	{
+		Cell lastCell = this.cells[row][col];
+
+		// Controllo a sinistra dell'ultima posizione usata
+		int numDisc = 1;
+		for (int i = 1; i <= 3; i++)
+		{
+			if (!isIndexInBound(row, col - i))
+				break;
+			
+			Cell cell = this.cells[row][col - i];
+			if (lastCell.getPlayer() == cell.getPlayer())
+			{
+				numDisc++;
+				if (numDisc == 4)
+					return true;
+			}
+		}
+		
+		// Controllo a destra dell'ultima posizione usata
+		numDisc = 1;
+		for (int i = 1; i <= 3; i++)
+		{
+			if (!isIndexInBound(row, col + i))
+				break;
+			
+			Cell cell = this.cells[row][col + i];
+			if (lastCell.getPlayer() == cell.getPlayer())
+			{
+				numDisc++;
+				if (numDisc == 4)
+					return true;
+			}
+		}
+		
+		return false;
+	}
 	
 	////////////////////////////////////////////////////////////////////////
 	public static void printField(PrintStream writer, final Grid grid)

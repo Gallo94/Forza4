@@ -20,8 +20,12 @@ public class Connect4Client
 	{
 		socket = new Socket(server, PORT);		
 		out = socket.getOutputStream();
-		
-		byte[] buf = new byte[] {MessageType.PLAYER_MOVE, 0};
-		out.write(buf);
+
+
+		for (int i = 3; i < 7; i++)
+		{
+			byte[] buf = new byte[] {MessageType.PLAYER_MOVE, (byte)i};
+			out.write(buf);
+		}
 	}
 }
