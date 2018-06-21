@@ -55,7 +55,7 @@ public class Grid {
 	
 	public boolean checkWin(final int row, final int col)
 	{	
-		return checkVerticalWin(row, col) || checkHorizontalWin(row, col);
+		return checkVerticalWin(row, col) || checkHorizontalWin(row, col) || checkDiagonals(row, col);
 	}
 	
 	private boolean checkVerticalWin(final int row, final int col)
@@ -109,6 +109,43 @@ public class Grid {
 				break;
 			
 			Cell cell = this.cells[row][col + i];
+			if (lastCell.getPlayer() == cell.getPlayer())
+			{
+				numDisc++;
+				if (numDisc == 4)
+					return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean checkDiagonals(final int row, final int col)
+	{
+		Cell lastCell = this.cells[row][col];
+		
+		int numDisc = 1;
+		for (int i = 1; i <= 3; i++)
+		{
+			if (!isIndexInBound(row + i, col + i))
+				break;
+			
+			Cell cell = this.cells[row + i][col + i];
+			if (lastCell.getPlayer() == cell.getPlayer())
+			{
+				numDisc++;
+				if (numDisc == 4)
+					return true;
+			}
+		}
+		
+		numDisc = 1;
+		for (int i = 1; i <= 3; i++)
+		{
+			if (!isIndexInBound(row + i, col - i))
+				break;
+			
+			Cell cell = this.cells[row + i][col - i];
 			if (lastCell.getPlayer() == cell.getPlayer())
 			{
 				numDisc++;

@@ -8,13 +8,14 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
+
 public class PlayerChannel
 {	
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
 	private Socket socket;
 	private Grid grid;
 	private Player player;
-	
 
 	public PlayerChannel(Socket socket, Grid grid)
 	{
@@ -31,6 +32,8 @@ public class PlayerChannel
 			{
 				processPlayerInput();
 				Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);
+				respondToPlayer();
+				
 				if (grid.won)
 				{
 					System.out.println("WON");
@@ -96,9 +99,15 @@ public class PlayerChannel
 	}
 	
 	// Invio dello stato al Client
-	private void respondToPlayer()
+	private void respondToPlayer() throws IOException
 	{
+		if (grid.won)
+		{
+			writeMessage(MessageType.GAME_OVER, (byte) 1);
+			return;
+		}
 		
+		writeMessage(MessageType.PLAYER_ONE_TURN, (byte) 0);
 	}
 	
 	private void makeMove(byte col)
