@@ -38,6 +38,7 @@ public class PlayerChannel
 			e.printStackTrace();
 		}
 	}
+	
 	// Lettura del messaggio dal client
 	private byte[] readMessage() throws IOException
 	{
@@ -51,6 +52,7 @@ public class PlayerChannel
 
 		return buf;
 	}
+	
 	// Scrive messaggio del Server per il Client
 	private void writeMessage(final byte type, final byte data) throws IOException
 	{
@@ -58,6 +60,7 @@ public class PlayerChannel
 		byte[] buf = new byte[] { type, data };
 		out.write(buf);
 	}
+	
 	// Elaborazione comandi del Client sul Server
 	private void processPlayerInput() throws IOException
 	{
@@ -75,6 +78,7 @@ public class PlayerChannel
 		default: break;	
 		}
 	}
+	
 	// Invio dello stato al Client
 	private void respondToPlayer()
 	{
