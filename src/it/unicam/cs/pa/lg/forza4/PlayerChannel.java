@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.net.Socket;
 
 import it.unicam.cs.pa.lg.forza4.Message;
+import it.unicam.cs.pa.lg.forza4.Match.MatchStatus;
 
 public class PlayerChannel
 {	
@@ -16,27 +17,26 @@ public class PlayerChannel
 	private Socket socket;
 	private Player player;
 	private Grid grid;
+	private Match match;
 	
-	public PlayerChannel(Socket socket, Player player, Grid grid)
+	public PlayerChannel(Socket socket, Player player, Grid grid, Match match)
 	{
 		this.socket = socket;
 		this.player = player;
 		this.grid = grid;
+		this.match = match;
 	}
 	
 	public void start()
 	{
 		try
 		{
-			sendPlayerId();	
+			sendPlayerId();
 
 			while (true)
 			{
-				processPlayerInput();
-				
-				Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);
-				
 				respondToPlayer();
+				processPlayerInput();
 				
 				if (this.grid.won)
 				{
@@ -88,26 +88,57 @@ public class PlayerChannel
 		switch (message.getType())
 		{
 		case MessageType.PLAYER_MOVE:
-		{
-			System.out.println("Player Move");
-			makeMove(message.getData());
+		{			
+			byte col = message.getData();
 			
+			makeMove(col);
+			
+			Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);		
+
 			break;
 		}
-		default: break;	
+		case MessageType.PLAYER_WAIT:
+			// do nothing
+			break;
 		}
 	}
 	
 	// Invio dello stato al Client
-	private void respondToPlayer() throws IOException
+	private void respondToPlayer() throws IOException, ClassNotFoundException
 	{
-		if (grid.won)
-		{
-			writeMessage(MessageType.GAME_OVER, (byte) 1);
-			return;
-		}
+		MatchStatus status = match.getStatus();
 		
-		writeMessage(MessageType.PLAYER_TURN, (byte) 0);
+		switch (status)
+		{
+		case P0_TURN:
+			{
+				writeMessage(MessageType.PLAYER_TURN, (byte) 0);
+				break;
+			}
+		case P1_TURN:
+			{
+				writeMessage(MessageType.PLAYER_TURN, (byte) 1);
+				break;
+			}
+		case P0_WON:
+			{
+				writeMessage(MessageType.GAME_OVER, (byte) 0);
+				break;
+			}
+		case P1_WON:
+			{
+				writeMessage(MessageType.GAME_OVER, (byte) 1);
+				break;
+			}
+		case DRAW:
+			{
+				writeMessage(MessageType.GAME_OVER, (byte) 2);
+				break;
+			}
+		case IDLE:
+			// do nothing
+			break;
+		}
 	}
 	
 	private void sendPlayerId() throws IOException
@@ -118,5 +149,8 @@ public class PlayerChannel
 	private void makeMove(byte col)
 	{
 		player.placeDisc(this.grid, col);
+		match.checkVictory();
+		match.checkDraw();
+		match.switchTurn();
 	}
 }

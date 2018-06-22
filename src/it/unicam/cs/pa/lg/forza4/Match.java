@@ -8,7 +8,7 @@ public class Match
 {
 	enum MatchStatus
 	{
-		NONE,
+		IDLE,
 		P0_TURN,
 		P1_TURN,
 		P0_WON,
@@ -16,32 +16,26 @@ public class Match
 		DRAW
 	}
 
-	private Player player0;
-	private Player player1;
-	private Player curPlayer;
+	private int curPlayer;
 	private Grid grid;
 	
+	MatchStatus status = MatchStatus.IDLE; 
 	
-	MatchStatus status = MatchStatus.NONE; 
 	
-	
-	public Match(final Player p0, final Player p1)
+	public Match()
 	{
-		this.player0 = p0;
-		this.player1 = p1;
-		this.grid = new Grid();
+		grid = new Grid();
 		
 		// First to play
 		Random rng = new Random(System.currentTimeMillis());
-		int randNumber = rng.nextInt(1);
-		this.curPlayer = randNumber == 0 ? player0 : player1;
-		this.status = randNumber == 0 ? MatchStatus.P0_TURN : MatchStatus.P1_TURN; 
+		curPlayer = rng.nextInt(1);
+		status = curPlayer == 0 ? MatchStatus.P0_TURN : MatchStatus.P1_TURN; 
 	}
 	
 	public void switchTurn()
 	{
-		curPlayer = (curPlayer == player0) ? player1 : player0;
-		status = (status == MatchStatus.P0_TURN) ? MatchStatus.P1_TURN : MatchStatus.P0_TURN;  
+		curPlayer = (curPlayer == 0) ? 1 : 0;
+		status = curPlayer == 0 ? MatchStatus.P0_TURN : MatchStatus.P1_TURN;  
 	}
 	
 	public void checkVictory()
@@ -64,6 +58,11 @@ public class Match
 	public MatchStatus getStatus()	
 	{
 		return status;
+	}
+	
+	public int getCurrentPlayer()
+	{
+		return curPlayer;
 	}
 	
 	public Grid getGrid()

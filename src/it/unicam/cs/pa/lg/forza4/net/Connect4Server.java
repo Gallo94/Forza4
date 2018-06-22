@@ -26,7 +26,6 @@ public class Connect4Server
 	
 	public void start()
 	{
-
 		try
 		{
 			ServerSocket server = new ServerSocket(PORT);
@@ -43,7 +42,7 @@ public class Connect4Server
 				numPlayers++;
 			}
 			
-			match = new Match(players[0], players[1]);
+			match = new Match();
 			
 			for (int i = 0; i < MAX_NUM_PLAYER; i++)
 			{
@@ -51,7 +50,8 @@ public class Connect4Server
 					new SessionThread(
 						clients[i],
 						players[i],
-						match.getGrid()
+						match.getGrid(),
+						match
 					)
 				).start();
 			}
@@ -69,19 +69,21 @@ public class Connect4Server
 		private Socket client;
 		private Player player;
 		private Grid grid;
+		private Match match;
 
-		public SessionThread(Socket client, Player player, Grid grid)
+		public SessionThread(Socket client, Player player, Grid grid, Match match)
 		{
 			this.client = client;
 			this.player = player;
 			this.grid = grid;
+			this.match = match;
 		}
 
 		public void run()
 		{
 			System.out.println("Connected with Player" + this.player.getId());
 			
-			new PlayerChannel(this.client, this.player, this.grid).start();
+			new PlayerChannel(this.client, this.player, this.grid, this.match).start();
 		}
 	}
 }
