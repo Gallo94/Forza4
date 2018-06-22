@@ -45,7 +45,7 @@ public class PlayerChannel
 				}
 			}
 
-			this.socket.close();
+//			this.socket.close();
 		}
 		catch (IOException | ClassNotFoundException e)
 		{
@@ -149,8 +149,10 @@ public class PlayerChannel
 	private void makeMove(byte col)
 	{
 		player.placeDisc(this.grid, col);
-		match.checkVictory();
-		match.checkDraw();
-		match.switchTurn();
+		
+		if (grid.won)
+			match.checkVictory();
+		else
+			match.switchTurn();
 	}
 }

@@ -1,10 +1,8 @@
 package it.unicam.cs.pa.lg.forza4.net;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -32,84 +30,86 @@ public class Connect4Client
 		}
 	}
 	
-	public void start()
+	public void start() throws IOException
 	{
 		boolean gameOver = false;
+		ObjectInputStream in = null;
+		ObjectOutputStream out = null;
 
 		while (!gameOver)
 		{
 			// Ricezione dal server
 			Message imsg = null;
-			ObjectInputStream in;
-			
+			byte id = 0;
 			try
 			{
 				in = new ObjectInputStream(socket.getInputStream());
 				imsg = (Message) in.readObject();
+				id = imsg.getData();
+				switch (imsg.getType())
+				{
+				case MessageType.PLAYER_TURN:
+					{	
+						if (id == playerId)
+						{
+							System.out.println("Your turn!");
+							System.out.println("Insert column:");
+							Scanner scanner = new Scanner(System.in);
+							byte input = scanner.nextByte();
+//							scanner.close();
+							
+							try
+							{
+								out = new ObjectOutputStream(socket.getOutputStream());
+								Message omsg = new Message(MessageType.PLAYER_MOVE, input);
+								out.writeObject(omsg);
+							}
+							catch (IOException e)
+							{
+								e.printStackTrace();
+							}
+						}
+						else
+						{
+//							System.out.println("Wait your turn!");
+							try
+							{
+								out = new ObjectOutputStream(socket.getOutputStream());
+								Message omsg = new Message(MessageType.PLAYER_WAIT, (byte)0); // garbage data
+								out.writeObject(omsg);
+							}
+							catch (IOException e)
+							{
+								e.printStackTrace();
+							}
+						}
+						
+						break;
+					}
+				case MessageType.GAME_OVER:
+					{				
+						if (id == 2)
+							System.out.println("Draw!");
+						else if (id == playerId)
+							System.out.println("You Won!");
+						else
+							System.out.println("You Lose!");
+						
+						gameOver = true;
+						
+						break;
+					}
+				}
 			}
 			catch (IOException | ClassNotFoundException e)
 			{
 				e.printStackTrace();
 			}
-			
-			byte id = imsg.getData();
-			switch (imsg.getType())
-			{
-			case MessageType.PLAYER_TURN:
-				{	
-					if (id == playerId)
-					{
-						System.out.println("Your turn!");
-						System.out.println("Insert column:");
-						Scanner scanner = new Scanner(System.in);
-						byte input = scanner.nextByte();
-//						scanner.close();
-						
-						try
-						{
-							ObjectOutputStream out;
-							out = new ObjectOutputStream(socket.getOutputStream());
-							Message omsg = new Message(MessageType.PLAYER_MOVE, input);
-							out.writeObject(omsg);
-						}
-						catch (IOException e)
-						{
-							e.printStackTrace();
-						}
-					}
-					else
-					{
-//						System.out.println("Wait your turn!");
-						try
-						{
-							ObjectOutputStream out;
-							out = new ObjectOutputStream(socket.getOutputStream());
-							Message omsg = new Message(MessageType.PLAYER_WAIT, (byte)0); // garbage data
-							out.writeObject(omsg);
-						}
-						catch (IOException e)
-						{
-							e.printStackTrace();
-						}
-					}
-					
-					break;
-				}
-			case MessageType.GAME_OVER:
-				{				
-					if (id == playerId)
-						System.out.println("You Won!");
-					else if (id == 2)
-						System.out.println("Draw!");
-					else
-						System.out.println("You Lose!");
-					
-					gameOver = true;
-					
-					break;
-				}
-			}
 		}
+		
+		in.close();
+		out.close();
+		socket.close();
 	}
 	
 	public void connectToServer(final String server, final int PORT) throws UnknownHostException, IOException, ClassNotFoundException

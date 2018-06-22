@@ -33,16 +33,13 @@ public class Match
 	}
 	
 	public void switchTurn()
-	{
+	{		
 		curPlayer = (curPlayer == 0) ? 1 : 0;
 		status = curPlayer == 0 ? MatchStatus.P0_TURN : MatchStatus.P1_TURN;  
 	}
 	
 	public void checkVictory()
-	{
-		if (!grid.won)
-			return;
-		
+	{		
 		status = (status == MatchStatus.P0_TURN) ? MatchStatus.P0_WON : MatchStatus.P1_WON;
 	}
 	
