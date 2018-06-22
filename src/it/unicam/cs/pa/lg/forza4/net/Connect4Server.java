@@ -5,32 +5,58 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import it.unicam.cs.pa.lg.forza4.Grid;
+import it.unicam.cs.pa.lg.forza4.Match;
+import it.unicam.cs.pa.lg.forza4.Player;
 import it.unicam.cs.pa.lg.forza4.PlayerChannel;
 
 public class Connect4Server
 {
 	public final static int PORT = 9001;
 	public final static int MAX_NUM_PLAYER = 2;
-	private int playerCounter = 0;
-	private Grid grid;
+	private Socket[] clients;
+	private Player[] players;
+	private int numPlayers = 0;
+	private Match match;
+	
+	public Connect4Server()
+	{
+		players = new Player[MAX_NUM_PLAYER];
+		clients = new Socket[MAX_NUM_PLAYER];
+	}
 	
 	public void start()
 	{
-		this.grid = new Grid();
-		
+
 		try
 		{
 			ServerSocket server = new ServerSocket(PORT);
 			System.out.println("Accept connections...");
-			
-			while (playerCounter != MAX_NUM_PLAYER)
+
+			while (numPlayers != MAX_NUM_PLAYER)
 			{
 				Socket client = server.accept();
-				playerCounter++;
-				System.out.println("Player " + playerCounter + " connected");
+				clients[numPlayers] = client;
 				
-				new Thread(new SessionThread(client, grid)).start();
+				Player player = new Player(client.getInetAddress(), (byte)numPlayers);
+				players[numPlayers] = player;
+				
+				numPlayers++;
 			}
+			
+			match = new Match(players[0], players[1]);
+			
+			for (int i = 0; i < MAX_NUM_PLAYER; i++)
+			{
+				new Thread(
+					new SessionThread(
+						clients[i],
+						players[i],
+						match.getGrid()
+					)
+				).start();
+			}
+			
+//			server.close();
 		}
 		catch (IOException e)
 		{
@@ -40,24 +66,22 @@ public class Connect4Server
 	
 	private class SessionThread implements Runnable
 	{
-		private Socket client = null;
+		private Socket client;
+		private Player player;
 		private Grid grid;
 
-		public SessionThread(Socket client, Grid grid)
+		public SessionThread(Socket client, Player player, Grid grid)
 		{
 			this.client = client;
+			this.player = player;
 			this.grid = grid;
 		}
 
 		public void run()
 		{
-			System.out.println("Connected with " + client.getInetAddress().toString());
-			try {
-				new PlayerChannel(this.client, this.grid);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.println("Connected with Player" + this.player.getId());
+			
+			new PlayerChannel(this.client, this.player, this.grid).start();
 		}
 	}
 }

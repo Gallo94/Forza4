@@ -3,41 +3,42 @@ package it.unicam.cs.pa.lg.forza4;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 
 import it.unicam.cs.pa.lg.forza4.Message;
+
 public class PlayerChannel
 {	
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
 	private Socket socket;
-	private Grid grid;
 	private Player player;
+	private Grid grid;
 	
-	private volatile static byte numPlayer = 0;
-
-	public PlayerChannel(Socket socket, Grid grid) throws IOException
+	public PlayerChannel(Socket socket, Player player, Grid grid)
 	{
 		this.socket = socket;
+		this.player = player;
 		this.grid = grid;
-		
-		numPlayer++;
-		this.player = new Player(grid, socket.getInetAddress(), numPlayer);
-		sendPlayerId();	
-			
+	}
+	
+	public void start()
+	{
 		try
 		{
+			sendPlayerId();	
+
 			while (true)
 			{
 				processPlayerInput();
+				
 				Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);
+				
 				respondToPlayer();
 				
-				if (grid.won)
+				if (this.grid.won)
 				{
 					System.out.println("WON");
 					break;
@@ -111,11 +112,11 @@ public class PlayerChannel
 	
 	private void sendPlayerId() throws IOException
 	{
-		writeMessage(MessageType.PLAYER_ID, numPlayer);
+		writeMessage(MessageType.PLAYER_ID, this.player.getId());
 	}
 	
 	private void makeMove(byte col)
 	{
-		player.placeDisc(col);
+		player.placeDisc(this.grid, col);
 	}
 }

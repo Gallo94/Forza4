@@ -158,6 +158,7 @@ public class Grid {
 	}
 	
 	////////////////////////////////////////////////////////////////////////
+	
 	public static void printField(PrintStream writer, final Grid grid)
 	{
 		int width = Grid.COLUMNS;
