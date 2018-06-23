@@ -53,16 +53,21 @@ public class Connect4Client
 						if (id == playerId)
 						{
 							System.out.println("Your turn!");
-							System.out.println("Insert column:");
+							System.out.println("Insert column between 0-6: ");
 							Scanner scanner = new Scanner(System.in);
+							while (!scanner.hasNextByte())
+							{
+								scanner.next();
+								System.out.println("Enter the correct number in range");
+							}
 							byte input = scanner.nextByte();
 //							scanner.close();
-							
 							try
 							{
 								out = new ObjectOutputStream(socket.getOutputStream());
 								Message omsg = new Message(MessageType.PLAYER_MOVE, input);
 								out.writeObject(omsg);
+								System.out.println("Wait your turn!");
 							}
 							catch (IOException e)
 							{
@@ -96,7 +101,7 @@ public class Connect4Client
 							System.out.println("You Lose!");
 						
 						gameOver = true;
-						
+						socket.close();
 						break;
 					}
 				}
