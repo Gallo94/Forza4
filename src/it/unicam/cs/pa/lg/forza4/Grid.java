@@ -1,8 +1,10 @@
 package it.unicam.cs.pa.lg.forza4;
 
-import java.io.PrintStream;
+import java.io.Serializable;
 
-public class Grid {
+public class Grid implements Serializable
+{
+	private static final long serialVersionUID = -6825761503971516066L;
 	
 	public static final int MAX_DISCS = 42;
 	public static final int ROWS = 6;
