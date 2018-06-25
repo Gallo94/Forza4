@@ -15,11 +15,11 @@ public class PlayerChannel
 {	
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
 	private Socket socket;
-	private HumanPlayer player;
-	private Grid grid;
+	private Player player;
+	private volatile Grid grid;
 	private Match match;
 	
-	public PlayerChannel(Socket socket, HumanPlayer player, Grid grid, Match match)
+	public PlayerChannel(Socket socket, Player player, Grid grid, Match match)
 	{
 		this.socket = socket;
 		this.player = player;
@@ -36,13 +36,14 @@ public class PlayerChannel
 			while (true)
 			{
 				respondToPlayer();
-				processPlayerInput();
 				
 				if (this.grid.won)
 				{
-					System.out.println("WON");
+					System.out.println("Player" + this.match.getWinPlayer() + " won!");
 					break;
 				}
+				
+				processPlayerInput();
 			}
 
 //			this.socket.close();
@@ -91,8 +92,17 @@ public class PlayerChannel
 		{			
 			byte col = message.getData();
 			
-			makeMove(col);
+			boolean success = makeMove(col);
+			writeMessage(MessageType.VALID_PLAY, (byte)(success ? 1 : 0));
 			
+			if (success)
+			{
+				if (grid.won)
+					match.checkVictory();
+				else
+					match.switchTurn();
+			}
+		
 			Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);		
 
 			break;
@@ -146,13 +156,8 @@ public class PlayerChannel
 		writeMessage(MessageType.PLAYER_ID, this.player.getId());
 	}
 	
-	private void makeMove(byte col)
+	private boolean makeMove(byte col)
 	{
-		player.placeDisc(this.grid, col);
-		
-		if (grid.won)
-			match.checkVictory();
-		else
-			match.switchTurn();
+		return player.placeDisc(this.grid, col);
 	}
 }

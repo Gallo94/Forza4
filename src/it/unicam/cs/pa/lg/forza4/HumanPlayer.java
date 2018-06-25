@@ -3,38 +3,34 @@ package it.unicam.cs.pa.lg.forza4;
 import java.net.InetAddress;
 import java.util.Scanner;
 
-public class HumanPlayer
-{
-	private String name;
-	private byte id;
-	
+public class HumanPlayer extends Player
+{	
 	public HumanPlayer(InetAddress address, byte id)
 	{
-		this.name = address.getHostAddress().toString();
-		this.id = id;
+		super(address, id);
 	}
 	
-	public byte getId()
-	{
-		return this.id;
-	}
-	
-	public void placeDisc(Grid grid, final byte col)
-	{
-		grid.addDisc(this, col);
-	}
-	
+	@Override
 	public byte input()
 	{
 		System.out.println("Your turn!");
 		System.out.println("Insert column between 0-6: ");
 		Scanner scanner = new Scanner(System.in);
-		while (!scanner.hasNextByte())
+		byte value;
+		do
 		{
-			scanner.next();
-			System.out.println("Enter the correct number in range");
-		}
+			while (!scanner.hasNextByte())
+			{
+				scanner.next();
+				System.out.println("Usage: numbers [0-6]");
+			}
 		
-		return scanner.nextByte();
+			value = scanner.nextByte();
+			if (value < 0 || value > 6)
+				System.out.println("Enter the correct number in range");
+		}
+		while (value < 0 || value > 6);
+		
+		return value;
 	}
 }

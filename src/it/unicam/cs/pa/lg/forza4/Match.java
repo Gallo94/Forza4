@@ -3,6 +3,8 @@ package it.unicam.cs.pa.lg.forza4;
 import java.sql.Time;
 import java.util.Random;
 
+import com.sun.tools.javac.comp.Infer;
+
 // Manager della partita
 public class Match
 {
@@ -18,8 +20,9 @@ public class Match
 
 	private int curPlayer;
 	private Grid grid;
+	MatchStatus status = MatchStatus.IDLE;
 	
-	MatchStatus status = MatchStatus.IDLE; 
+	private int winPlayer;
 	
 	
 	public Match()
@@ -29,7 +32,9 @@ public class Match
 		// First to play
 		Random rng = new Random(System.currentTimeMillis());
 		curPlayer = rng.nextInt(1);
-		status = curPlayer == 0 ? MatchStatus.P0_TURN : MatchStatus.P1_TURN; 
+		status = curPlayer == 0 ? MatchStatus.P0_TURN : MatchStatus.P1_TURN;
+		
+		winPlayer = -1;
 	}
 	
 	public void switchTurn()
@@ -39,8 +44,9 @@ public class Match
 	}
 	
 	public void checkVictory()
-	{		
+	{	
 		status = (status == MatchStatus.P0_TURN) ? MatchStatus.P0_WON : MatchStatus.P1_WON;
+		winPlayer = (status == MatchStatus.P0_WON) ? 0 : 1;
 	}
 	
 	public void checkDraw()
@@ -60,6 +66,11 @@ public class Match
 	public int getCurrentPlayer()
 	{
 		return curPlayer;
+	}
+	
+	public int getWinPlayer()
+	{
+		return winPlayer;
 	}
 	
 	public Grid getGrid()

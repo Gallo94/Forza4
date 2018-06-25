@@ -3,13 +3,15 @@ package it.unicam.cs.pa.lg.forza4.net;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
+
+import com.sun.tools.doclint.Checker.Flag;
 
 import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.MessageType;
+import it.unicam.cs.pa.lg.forza4.Player;
+import it.unicam.cs.pa.lg.forza4.RandomPlayer;
 import it.unicam.cs.pa.lg.forza4.HumanPlayer;
 
 public class Connect4Client
@@ -17,7 +19,7 @@ public class Connect4Client
 	public static final int PORT = 9001;
 	private Socket socket = null;
 	private boolean isActive = false;
-	private HumanPlayer player;
+	private Player player;
 
 	// Message attributes
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
@@ -53,14 +55,28 @@ public class Connect4Client
 				case MessageType.PLAYER_TURN:
 					{	
 						if (id == player.getId())
-						{
-							byte input = player.input();
-							
+						{	
 							try
 							{
-								out = new ObjectOutputStream(socket.getOutputStream());
-								Message omsg = new Message(MessageType.PLAYER_MOVE, input);
-								out.writeObject(omsg);
+								boolean isValid = false;
+								do
+								{
+									byte input = player.input();
+									out = new ObjectOutputStream(socket.getOutputStream());
+									Message omsg = new Message(MessageType.PLAYER_MOVE, input);
+									out.writeObject(omsg);
+									
+									in = new ObjectInputStream(socket.getInputStream());
+									Message returnMessage = (Message) in.readObject();
+									if (returnMessage.getType() == MessageType.VALID_PLAY)
+									{
+										isValid = returnMessage.getData() == 1 ? true : false;
+										if (!isValid)
+											System.out.println("Bad play");
+									}
+								}
+								while (!isValid);
+								
 								System.out.println("Wait your turn!");
 							}
 							catch (IOException e)
@@ -94,7 +110,7 @@ public class Connect4Client
 							System.out.println("You Lose!");
 						
 						gameOver = true;
-						socket.close();
+						
 						break;
 					}
 				}
@@ -120,6 +136,7 @@ public class Connect4Client
 		assert (imsg.getType() == MessageType.PLAYER_ID);
 		
 		byte playerId = imsg.getData();
+//		this.player = new RandomPlayer(socket.getInetAddress(), playerId);
 		this.player = new HumanPlayer(socket.getInetAddress(), playerId);
 		System.out.println("Player ID: " + this.player.getId());
 	}

@@ -21,12 +21,12 @@ public class Grid {
 		this.disc_counter = 0;
 	}
 	
-	public boolean addDisc(HumanPlayer player, final byte col)
+	public boolean addDisc(Player player, final byte col)
 	{
 		for (int i = ROWS - 1; i >= 0; i--)
 		{
 			Cell cell = this.cells[i][col];
-			if (cell.isEmpty())
+			if (cell.isEmpty() && isIndexInBound(i, col))
 			{
 				cell.setPlayer(player);
 				cell.setRow((byte)i);
@@ -37,7 +37,8 @@ public class Grid {
 				
 				return true;
 			}
-			else continue;
+			else
+				continue;
 		}
 		
 		return false;
