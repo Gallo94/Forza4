@@ -3,19 +3,21 @@ package it.unicam.cs.pa.lg.forza4.net;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.MessageType;
+import it.unicam.cs.pa.lg.forza4.Player;
 
 public class Connect4Client
 {
 	public static final int PORT = 9001;
 	private Socket socket = null;
-	private byte playerId;
 	private boolean isActive = false;
+	private Player player;
 
 	// Message attributes
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
@@ -50,18 +52,10 @@ public class Connect4Client
 				{
 				case MessageType.PLAYER_TURN:
 					{	
-						if (id == playerId)
+						if (id == player.getId())
 						{
-							System.out.println("Your turn!");
-							System.out.println("Insert column between 0-6: ");
-							Scanner scanner = new Scanner(System.in);
-							while (!scanner.hasNextByte())
-							{
-								scanner.next();
-								System.out.println("Enter the correct number in range");
-							}
-							byte input = scanner.nextByte();
-//							scanner.close();
+							byte input = player.input();
+							
 							try
 							{
 								out = new ObjectOutputStream(socket.getOutputStream());
@@ -76,7 +70,6 @@ public class Connect4Client
 						}
 						else
 						{
-//							System.out.println("Wait your turn!");
 							try
 							{
 								out = new ObjectOutputStream(socket.getOutputStream());
@@ -95,7 +88,7 @@ public class Connect4Client
 					{				
 						if (id == 2)
 							System.out.println("Draw!");
-						else if (id == playerId)
+						else if (id == player.getId())
 							System.out.println("You Won!");
 						else
 							System.out.println("You Lose!");
@@ -126,7 +119,8 @@ public class Connect4Client
 		imsg = (Message) in.readObject();
 		assert (imsg.getType() == MessageType.PLAYER_ID);
 		
-		this.playerId = imsg.getData();
-		System.out.println("Player ID: " + this.playerId);
+		byte playerId = imsg.getData();
+		this.player = new Player(socket.getInetAddress(), playerId);
+		System.out.println("Player ID: " + this.player.getId());
 	}
 }
