@@ -1,9 +1,6 @@
 package it.unicam.cs.pa.lg.forza4;
 
-import java.sql.Time;
 import java.util.Random;
-
-import com.sun.tools.javac.comp.Infer;
 
 // Manager della partita
 public class Match

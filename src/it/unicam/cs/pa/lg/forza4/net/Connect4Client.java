@@ -6,7 +6,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.sun.tools.doclint.Checker.Flag;
 
 import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.MessageType;
@@ -136,8 +135,8 @@ public class Connect4Client
 		assert (imsg.getType() == MessageType.PLAYER_ID);
 		
 		byte playerId = imsg.getData();
-//		this.player = new RandomPlayer(socket.getInetAddress(), playerId);
-		this.player = new HumanPlayer(socket.getInetAddress(), playerId);
+		this.player = new RandomPlayer(socket.getInetAddress(), playerId);
+//		this.player = new HumanPlayer(socket.getInetAddress(), playerId);
 		System.out.println("Player ID: " + this.player.getId());
 	}
 }
