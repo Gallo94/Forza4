@@ -3,9 +3,9 @@ package it.unicam.cs.pa.lg.forza4;
 import java.net.InetAddress;
 import java.util.Scanner;
 
-public class HumanPlayer extends Player
+public class PlayerHuman extends Player
 {	
-	public HumanPlayer(byte id)
+	public PlayerHuman(byte id)
 	{
 		super(id);
 	}

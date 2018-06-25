@@ -6,11 +6,11 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import it.unicam.cs.pa.lg.forza4.HumanPlayer;
+import it.unicam.cs.pa.lg.forza4.PlayerHuman;
 import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.MessageType;
 import it.unicam.cs.pa.lg.forza4.Player;
-import it.unicam.cs.pa.lg.forza4.RandomPlayer;
+import it.unicam.cs.pa.lg.forza4.PlayerRandom;
 
 public class Connect4Client
 {
@@ -23,10 +23,12 @@ public class Connect4Client
 	
 	public Connect4Client(final String server, final int port)
 	{
-		try {
+		try
+		{
 			connectToServer(server, port);
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (ClassNotFoundException | IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -133,8 +135,8 @@ public class Connect4Client
 		assert (imsg.getType() == MessageType.PLAYER_ID);
 		
 		byte playerId = imsg.getData();
-//		this.player = new RandomPlayer(playerId);
-		this.player = new HumanPlayer(playerId);
+		this.player = new PlayerRandom(playerId);
+//		this.player = new HumanPlayer(playerId);
 		System.out.println("Player ID: " + this.player.getId());
 	}
 }

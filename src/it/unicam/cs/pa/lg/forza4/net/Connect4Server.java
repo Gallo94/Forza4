@@ -7,7 +7,7 @@ import java.net.Socket;
 import it.unicam.cs.pa.lg.forza4.Grid;
 import it.unicam.cs.pa.lg.forza4.Match;
 import it.unicam.cs.pa.lg.forza4.Player;
-import it.unicam.cs.pa.lg.forza4.HumanPlayer;
+import it.unicam.cs.pa.lg.forza4.PlayerHuman;
 import it.unicam.cs.pa.lg.forza4.PlayerChannel;
 
 public class Connect4Server
@@ -22,7 +22,7 @@ public class Connect4Server
 	
 	public Connect4Server()
 	{
-		players = new HumanPlayer[MAX_NUM_PLAYER];
+		players = new PlayerHuman[MAX_NUM_PLAYER];
 		clients = new Socket[MAX_NUM_PLAYER];
 	}
 	
@@ -39,7 +39,7 @@ public class Connect4Server
 				Socket client = server.accept();
 				clients[numPlayers] = client;
 				
-				Player player = new HumanPlayer((byte) numPlayers);
+				Player player = new PlayerHuman((byte) numPlayers);
 				players[numPlayers] = player;
 				
 				numPlayers++;

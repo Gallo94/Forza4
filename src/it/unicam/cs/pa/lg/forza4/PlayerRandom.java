@@ -2,9 +2,9 @@ package it.unicam.cs.pa.lg.forza4;
 
 import java.util.Random;
 
-public class RandomPlayer extends Player
+public class PlayerRandom extends Player
 {
-	public RandomPlayer(final byte id)
+	public PlayerRandom(final byte id)
 	{
 		super(id);
 	}
@@ -15,5 +15,4 @@ public class RandomPlayer extends Player
 		Random rng = new Random(System.currentTimeMillis());
 		return (byte) rng.nextInt(6);
 	}
-
 }
