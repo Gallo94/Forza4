@@ -1,7 +1,14 @@
 package it.unicam.cs.pa.lg.forza4;
 
-public abstract class Player
+import java.io.Serializable;
+
+public abstract class Player implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3324651541378196476L;
+	
 	protected String name;
 	protected byte id;
 	

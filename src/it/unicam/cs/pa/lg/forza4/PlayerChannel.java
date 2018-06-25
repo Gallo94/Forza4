@@ -79,11 +79,11 @@ public class PlayerChannel
 		out.writeObject(message);
 	}
 	
-//	private void writeGrid() throws IOException
-//	{
-//		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-//		out.writeObject(grid);
-//	}
+	private void writeGrid() throws IOException
+	{
+		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+		out.writeObject(this.match.getGrid());
+	}
 	
 	// Elaborazione comandi del Client sul Server
 	private void processPlayerInput() throws IOException, ClassNotFoundException
@@ -101,6 +101,8 @@ public class PlayerChannel
 			
 			if (success)
 			{
+				writeGrid();
+
 				if (this.match.getGrid().won)
 					match.checkVictory();
 				else

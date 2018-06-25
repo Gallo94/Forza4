@@ -1,7 +1,14 @@
 package it.unicam.cs.pa.lg.forza4;
 
-public class Cell
+import java.io.Serializable;
+
+public class Cell implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8885311864378222102L;
+	
 	public static final byte INVALID_COORD = -1;
 	private Player player;
 	private byte col, row;

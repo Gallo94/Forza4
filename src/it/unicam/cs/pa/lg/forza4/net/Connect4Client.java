@@ -7,16 +7,19 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import it.unicam.cs.pa.lg.forza4.PlayerHuman;
+import it.unicam.cs.pa.lg.forza4.Grid;
 import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.MessageType;
 import it.unicam.cs.pa.lg.forza4.Player;
 import it.unicam.cs.pa.lg.forza4.PlayerRandom;
+import it.unicam.cs.pa.lg.forza4.PrintUtils;
 
 public class Connect4Client
 {
 	public static final int PORT = 9001;
 	private Socket socket = null;
 	private Player player;
+	private Grid grid;
 
 	// Message attributes
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
@@ -72,6 +75,11 @@ public class Connect4Client
 										isValid = returnMessage.getData() == 1 ? true : false;
 										if (!isValid)
 											System.out.println("Bad play");
+										else
+										{
+											readGrid();
+											PrintUtils.printField(System.out, grid);
+										}
 									}
 								}
 								while (!isValid);
@@ -138,5 +146,11 @@ public class Connect4Client
 		this.player = new PlayerRandom(playerId);
 //		this.player = new HumanPlayer(playerId);
 		System.out.println("Player ID: " + this.player.getId());
+	}
+	
+	public void readGrid() throws IOException, ClassNotFoundException
+	{
+		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+		this.grid = (Grid) in.readObject();
 	}
 }
