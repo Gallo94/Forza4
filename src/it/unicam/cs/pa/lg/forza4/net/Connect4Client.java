@@ -143,8 +143,8 @@ public class Connect4Client
 		assert (imsg.getType() == MessageType.PLAYER_ID);
 		
 		byte playerId = imsg.getData();
-		this.player = new PlayerRandom(playerId);
-//		this.player = new HumanPlayer(playerId);
+//		this.player = new PlayerRandom(playerId);
+		this.player = new PlayerHuman(playerId);
 		System.out.println("Player ID: " + this.player.getId());
 	}
 	
