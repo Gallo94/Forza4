@@ -31,6 +31,7 @@ public class Connect4Server
 		try
 		{
 			ServerSocket server = new ServerSocket(PORT);
+			
 			System.out.println("Accept connections...");
 
 			while (numPlayers != MAX_NUM_PLAYER)
@@ -38,7 +39,7 @@ public class Connect4Server
 				Socket client = server.accept();
 				clients[numPlayers] = client;
 				
-				Player player = new HumanPlayer(client.getInetAddress(), (byte)numPlayers);
+				Player player = new HumanPlayer((byte) numPlayers);
 				players[numPlayers] = player;
 				
 				numPlayers++;
@@ -58,7 +59,7 @@ public class Connect4Server
 				).start();
 			}
 			
-//			server.close();
+			server.close();
 		}
 		catch (IOException e)
 		{
@@ -83,7 +84,7 @@ public class Connect4Server
 
 		public void run()
 		{
-			System.out.println("Connected with Player" + this.player.getId());
+			System.out.println("Connected with " +  this.player.getName());
 			
 			new PlayerChannel(this.client, this.player, this.grid, this.match).start();
 		}

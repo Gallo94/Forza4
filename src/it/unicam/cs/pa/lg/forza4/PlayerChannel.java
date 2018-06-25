@@ -103,7 +103,7 @@ public class PlayerChannel
 					match.switchTurn();
 			}
 		
-			Grid.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);		
+			PrintUtils.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), grid);		
 
 			break;
 		}

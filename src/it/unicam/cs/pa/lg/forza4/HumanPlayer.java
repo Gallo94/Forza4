@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class HumanPlayer extends Player
 {	
-	public HumanPlayer(InetAddress address, byte id)
+	public HumanPlayer(byte id)
 	{
-		super(address, id);
+		super(id);
 	}
 	
 	@Override
@@ -30,6 +30,9 @@ public class HumanPlayer extends Player
 				System.out.println("Enter the correct number in range");
 		}
 		while (value < 0 || value > 6);
+		
+		// FIXME: close scanner
+//		scanner.close();
 		
 		return value;
 	}

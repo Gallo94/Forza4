@@ -1,13 +1,12 @@
 package it.unicam.cs.pa.lg.forza4;
 
-import java.net.InetAddress;
 import java.util.Random;
 
 public class RandomPlayer extends Player
 {
-	public RandomPlayer(InetAddress address,  final byte id)
+	public RandomPlayer(final byte id)
 	{
-		super(address, id);
+		super(id);
 	}
 	
 	@Override
