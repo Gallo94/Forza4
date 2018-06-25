@@ -3,12 +3,12 @@ package it.unicam.cs.pa.lg.forza4;
 import java.net.InetAddress;
 import java.util.Scanner;
 
-public class Player
+public class HumanPlayer
 {
 	private String name;
 	private byte id;
 	
-	public Player(InetAddress address, byte id)
+	public HumanPlayer(InetAddress address, byte id)
 	{
 		this.name = address.getHostAddress().toString();
 		this.id = id;

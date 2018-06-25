@@ -6,7 +6,7 @@ import java.net.Socket;
 
 import it.unicam.cs.pa.lg.forza4.Grid;
 import it.unicam.cs.pa.lg.forza4.Match;
-import it.unicam.cs.pa.lg.forza4.Player;
+import it.unicam.cs.pa.lg.forza4.HumanPlayer;
 import it.unicam.cs.pa.lg.forza4.PlayerChannel;
 
 public class Connect4Server
@@ -14,13 +14,13 @@ public class Connect4Server
 	public final static int PORT = 9001;
 	public final static int MAX_NUM_PLAYER = 2;
 	private Socket[] clients;
-	private Player[] players;
+	private HumanPlayer[] players;
 	private int numPlayers = 0;
 	private Match match;
 	
 	public Connect4Server()
 	{
-		players = new Player[MAX_NUM_PLAYER];
+		players = new HumanPlayer[MAX_NUM_PLAYER];
 		clients = new Socket[MAX_NUM_PLAYER];
 	}
 	
@@ -36,7 +36,7 @@ public class Connect4Server
 				Socket client = server.accept();
 				clients[numPlayers] = client;
 				
-				Player player = new Player(client.getInetAddress(), (byte)numPlayers);
+				HumanPlayer player = new HumanPlayer(client.getInetAddress(), (byte)numPlayers);
 				players[numPlayers] = player;
 				
 				numPlayers++;
@@ -67,11 +67,11 @@ public class Connect4Server
 	private class SessionThread implements Runnable
 	{
 		private Socket client;
-		private Player player;
+		private HumanPlayer player;
 		private Grid grid;
 		private Match match;
 
-		public SessionThread(Socket client, Player player, Grid grid, Match match)
+		public SessionThread(Socket client, HumanPlayer player, Grid grid, Match match)
 		{
 			this.client = client;
 			this.player = player;

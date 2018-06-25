@@ -10,14 +10,14 @@ import java.util.Scanner;
 
 import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.MessageType;
-import it.unicam.cs.pa.lg.forza4.Player;
+import it.unicam.cs.pa.lg.forza4.HumanPlayer;
 
 public class Connect4Client
 {
 	public static final int PORT = 9001;
 	private Socket socket = null;
 	private boolean isActive = false;
-	private Player player;
+	private HumanPlayer player;
 
 	// Message attributes
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
@@ -120,7 +120,7 @@ public class Connect4Client
 		assert (imsg.getType() == MessageType.PLAYER_ID);
 		
 		byte playerId = imsg.getData();
-		this.player = new Player(socket.getInetAddress(), playerId);
+		this.player = new HumanPlayer(socket.getInetAddress(), playerId);
 		System.out.println("Player ID: " + this.player.getId());
 	}
 }

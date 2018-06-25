@@ -15,11 +15,11 @@ public class PlayerChannel
 {	
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
 	private Socket socket;
-	private Player player;
+	private HumanPlayer player;
 	private Grid grid;
 	private Match match;
 	
-	public PlayerChannel(Socket socket, Player player, Grid grid, Match match)
+	public PlayerChannel(Socket socket, HumanPlayer player, Grid grid, Match match)
 	{
 		this.socket = socket;
 		this.player = player;

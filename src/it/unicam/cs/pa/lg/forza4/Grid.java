@@ -21,7 +21,7 @@ public class Grid {
 		this.disc_counter = 0;
 	}
 	
-	public boolean addDisc(Player player, final byte col)
+	public boolean addDisc(HumanPlayer player, final byte col)
 	{
 		for (int i = ROWS - 1; i >= 0; i--)
 		{

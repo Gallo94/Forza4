@@ -3,7 +3,7 @@ package it.unicam.cs.pa.lg.forza4;
 public class Cell
 {
 	public static final byte INVALID_COORD = -1;
-	private Player player;
+	private HumanPlayer player;
 	private byte col, row;
 		
 	public Cell()
@@ -13,12 +13,12 @@ public class Cell
 		this.row = INVALID_COORD;
 	}
 	
-	public void setPlayer(final Player player)
+	public void setPlayer(final HumanPlayer player)
 	{ 
 		this.player = player;
 	}
 	
-	public Player getPlayer()
+	public HumanPlayer getPlayer()
 	{
 		return this.player;
 	}
