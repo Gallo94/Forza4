@@ -105,10 +105,8 @@ public class PlayerChannel
 				
 			} while (!success);
 			
-			if (this.match.getGrid().won)			
-				match.checkVictory();
-			else
-				match.switchTurn();
+			match.checkVictory();
+			match.switchTurn();
 		
 			break;
 		}

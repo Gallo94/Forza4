@@ -135,19 +135,18 @@ public class Grid implements Serializable
 		int numDisc = 1;
 		for (int i = 1; i <= 3; i++)
 		{
-			if (!isIndexInBound(row + i, col + i))
+			if (!isIndexInBound(row - i, col + i))
 				break;
 			
-			Cell cell = this.cells[row + i][col + i];
+			Cell cell = this.cells[row - i][col + i];
 			if (lastCell.getPlayer() == cell.getPlayer())
 			{
 				numDisc++;
-				if (numDisc == 4)
+				if (numDisc >= 4)
 					return true;
 			}
 		}
 		
-		numDisc = 1;
 		for (int i = 1; i <= 3; i++)
 		{
 			if (!isIndexInBound(row + i, col - i))
@@ -157,7 +156,36 @@ public class Grid implements Serializable
 			if (lastCell.getPlayer() == cell.getPlayer())
 			{
 				numDisc++;
-				if (numDisc == 4)
+				if (numDisc >= 4)
+					return true;
+			}
+		}
+		
+		numDisc = 1;
+		for (int i = 1; i <= 3; i++)
+		{
+			if (!isIndexInBound(row + i, col + i))
+				break;
+			
+			Cell cell = this.cells[row + i][col + i];
+			if (lastCell.getPlayer() == cell.getPlayer())
+			{
+				numDisc++;
+				if (numDisc >= 4)
+					return true;
+			}
+		}
+		
+		for (int i = 1; i <= 3; i++)
+		{
+			if (!isIndexInBound(row - i, col - i))
+				break;
+			
+			Cell cell = this.cells[row - i][col - i];
+			if (lastCell.getPlayer() == cell.getPlayer())
+			{
+				numDisc++;
+				if (numDisc >= 4)
 					return true;
 			}
 		}

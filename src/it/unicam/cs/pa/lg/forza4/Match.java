@@ -35,15 +35,21 @@ public class Match
 	}
 	
 	public void switchTurn()
-	{		
-		curPlayer = (curPlayer == 0) ? 1 : 0;
-		status = curPlayer == 0 ? MatchStatus.P0_TURN : MatchStatus.P1_TURN;  
+	{
+		if (!this.grid.won)
+		{
+			curPlayer = (curPlayer == 0) ? 1 : 0;
+			status = curPlayer == 0 ? MatchStatus.P0_TURN : MatchStatus.P1_TURN;
+		}
 	}
 	
 	public void checkVictory()
 	{	
-		status = (status == MatchStatus.P0_TURN) ? MatchStatus.P0_WON : MatchStatus.P1_WON;
-		winPlayer = (status == MatchStatus.P0_WON) ? 0 : 1;
+		if (this.grid.won)
+		{
+			status = (status == MatchStatus.P0_TURN) ? MatchStatus.P0_WON : MatchStatus.P1_WON;
+			winPlayer = (status == MatchStatus.P0_WON) ? 0 : 1;
+		}
 	}
 	
 	public void checkDraw()
