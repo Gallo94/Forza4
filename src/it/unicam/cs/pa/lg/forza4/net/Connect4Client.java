@@ -36,50 +36,45 @@ public class Connect4Client
 		}
 	}
 	
-	public void start() throws IOException
+	public void start() throws IOException, ClassNotFoundException
 	{
 		boolean gameOver = false;
-		ObjectInputStream in = null;
-		ObjectOutputStream out = null;
 
 		while (!gameOver)
 		{
 			// Ricezione dal server
 			Message imsg = null;
 			byte id = 0;
+						
 			try
-			{
-				in = new ObjectInputStream(socket.getInputStream());
-				imsg = (Message) in.readObject();
-				id = imsg.getData();
+			{			
+				imsg = readResponse();
 				switch (imsg.getType())
 				{
 				case MessageType.PLAYER_TURN:
 					{	
+						this.grid = readGrid();
+						id = imsg.getData();
 						if (id == player.getId())
-						{	
+						{		
 							try
 							{
 								boolean isValid = false;
 								do
-								{
+								{										
+									PrintUtils.printField(System.out, grid);
 									byte input = player.input();
-									out = new ObjectOutputStream(socket.getOutputStream());
-									Message omsg = new Message(MessageType.PLAYER_MOVE, input);
-									out.writeObject(omsg);
 									
-									in = new ObjectInputStream(socket.getInputStream());
-									Message returnMessage = (Message) in.readObject();
+									writeMessage(MessageType.PLAYER_MOVE, input);
+									
+									Message returnMessage = readMessage();
+									this.grid = readGrid();
+
 									if (returnMessage.getType() == MessageType.VALID_PLAY)
 									{
 										isValid = returnMessage.getData() == 1 ? true : false;
 										if (!isValid)
 											System.out.println("Bad play");
-										else
-										{
-											readGrid();
-											PrintUtils.printField(System.out, grid);
-										}
 									}
 								}
 								while (!isValid);
@@ -95,9 +90,7 @@ public class Connect4Client
 						{
 							try
 							{
-								out = new ObjectOutputStream(socket.getOutputStream());
-								Message omsg = new Message(MessageType.PLAYER_WAIT, (byte)0); // garbage data
-								out.writeObject(omsg);
+								writeMessage(MessageType.PLAYER_WAIT, (byte)0);
 							}
 							catch (IOException e)
 							{
@@ -108,7 +101,9 @@ public class Connect4Client
 						break;
 					}
 				case MessageType.GAME_OVER:
-					{				
+					{		
+						id = imsg.getData();
+
 						if (id == 2)
 							System.out.println("Draw!");
 						else if (id == player.getId())
@@ -128,8 +123,6 @@ public class Connect4Client
 			}
 		}
 		
-		in.close();
-		out.close();
 		socket.close();
 	}
 	
@@ -137,20 +130,58 @@ public class Connect4Client
 	{
 		socket = new Socket(server, PORT);
 		
-		Message imsg = null;
-		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-		imsg = (Message) in.readObject();
-		assert (imsg.getType() == MessageType.PLAYER_ID);
-		
-		byte playerId = imsg.getData();
+		byte playerId = readPlayerId();
 //		this.player = new PlayerRandom(playerId);
 		this.player = new PlayerHuman(playerId);
 		System.out.println("Player ID: " + this.player.getId());
 	}
 	
-	public void readGrid() throws IOException, ClassNotFoundException
+	public byte readPlayerId() throws ClassNotFoundException, IOException
 	{
 		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-		this.grid = (Grid) in.readObject();
+		Message message = (Message) in.readObject();
+		assert (message.getType() == MessageType.PLAYER_ID);
+		return message.getData();
 	}
+	
+	public Grid readGrid() throws IOException, ClassNotFoundException
+	{
+		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+		return (Grid) in.readObject();
+	}
+	
+	public Message readResponse() throws ClassNotFoundException, IOException
+	{
+		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+		Message message = (Message) in.readObject();
+		return message;
+	}
+	
+	// Lettura del messaggio dal client
+	private Message readMessage() throws IOException, ClassNotFoundException
+	{
+		Message message = null;
+
+		try
+		{
+			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+			message = (Message) in.readObject();
+		}
+		catch (IOException e)
+		{
+			System.out.println("PlayerChannel: Wrong read message");
+			throw e;
+		}
+
+		return message;
+	}
+	
+	// Scrive messaggio del Server per il Client
+	private void writeMessage(final byte type, final byte data) throws IOException
+	{
+		Message message = new Message(type, data);
+		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+		out.writeObject(message);
+	}
+	
 }

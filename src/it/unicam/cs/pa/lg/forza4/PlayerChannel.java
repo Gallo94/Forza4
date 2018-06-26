@@ -29,12 +29,12 @@ public class PlayerChannel
 	{
 		try
 		{
-			sendPlayerId();
+			writePlayerId();
 
 			while (true)
 			{
-				respondToPlayer();
-				
+				writeResponse();
+								
 				if (match.getGrid().won)
 				{
 					System.out.println("Player" + this.match.getWinPlayer() + " won!");
@@ -93,34 +93,34 @@ public class PlayerChannel
 		switch (message.getType())
 		{
 		case MessageType.PLAYER_MOVE:
-		{			
-			byte col = message.getData();
+		{	
+			boolean success = false;
 			
-			boolean success = makeMove(col);
-			writeMessage(MessageType.VALID_PLAY, (byte)(success ? 1 : 0));
-			
-			if (success)
+			do
 			{
+				byte col = message.getData();
+				success = makeMove(col);
+				writeMessage(MessageType.VALID_PLAY, (byte)(success ? 1 : 0));
 				writeGrid();
-
-				if (this.match.getGrid().won)
-					match.checkVictory();
-				else
-					match.switchTurn();
-			}
+				
+			} while (!success);
+			
+			if (this.match.getGrid().won)			
+				match.checkVictory();
+			else
+				match.switchTurn();
 		
-			PrintUtils.printField(new PrintStream(new FileOutputStream(FileDescriptor.out)), this.match.getGrid());		
-
 			break;
 		}
 		case MessageType.PLAYER_WAIT:
 			// do nothing
+
 			break;
 		}
 	}
 	
 	// Invio dello stato al Client
-	private void respondToPlayer() throws IOException, ClassNotFoundException
+	private void writeResponse() throws IOException, ClassNotFoundException
 	{
 		MatchStatus status = match.getStatus();
 		
@@ -129,11 +129,13 @@ public class PlayerChannel
 		case P0_TURN:
 			{
 				writeMessage(MessageType.PLAYER_TURN, (byte) 0);
+				writeGrid();
 				break;
 			}
 		case P1_TURN:
 			{
 				writeMessage(MessageType.PLAYER_TURN, (byte) 1);
+				writeGrid();
 				break;
 			}
 		case P0_WON:
@@ -157,7 +159,7 @@ public class PlayerChannel
 		}
 	}
 	
-	private void sendPlayerId() throws IOException
+	private void writePlayerId() throws IOException
 	{
 		writeMessage(MessageType.PLAYER_ID, this.player.getId());
 	}
