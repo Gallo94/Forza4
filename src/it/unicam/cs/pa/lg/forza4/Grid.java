@@ -132,6 +132,7 @@ public class Grid implements Serializable
 	{
 		Cell lastCell = this.cells[row][col];
 		
+		// da top-right a bottom-left
 		int numDisc = 1;
 		for (int i = 1; i <= 3; i++)
 		{
@@ -139,13 +140,14 @@ public class Grid implements Serializable
 				break;
 			
 			Cell cell = this.cells[row - i][col + i];
-			if (lastCell.getPlayer() == cell.getPlayer())
-			{
-				numDisc++;
-				if (numDisc >= 4)
-					return true;
-			}
+			if (lastCell.getPlayer() != cell.getPlayer())
+				break;
+			
+			numDisc++;
 		}
+		
+		if (numDisc >= 4)
+			return true;
 		
 		for (int i = 1; i <= 3; i++)
 		{
@@ -153,14 +155,16 @@ public class Grid implements Serializable
 				break;
 			
 			Cell cell = this.cells[row + i][col - i];
-			if (lastCell.getPlayer() == cell.getPlayer())
-			{
-				numDisc++;
-				if (numDisc >= 4)
-					return true;
-			}
+			if (lastCell.getPlayer() != cell.getPlayer())
+				break;
+			
+			numDisc++;
 		}
 		
+		if (numDisc >= 4)
+			return true;
+		
+		// da top-left a bottom-right
 		numDisc = 1;
 		for (int i = 1; i <= 3; i++)
 		{
@@ -168,13 +172,14 @@ public class Grid implements Serializable
 				break;
 			
 			Cell cell = this.cells[row + i][col + i];
-			if (lastCell.getPlayer() == cell.getPlayer())
-			{
-				numDisc++;
-				if (numDisc >= 4)
-					return true;
-			}
+			if (lastCell.getPlayer() != cell.getPlayer())
+				break;
+			
+			numDisc++;
 		}
+		
+		if (numDisc >= 4)
+			return true;
 		
 		for (int i = 1; i <= 3; i++)
 		{
@@ -182,13 +187,14 @@ public class Grid implements Serializable
 				break;
 			
 			Cell cell = this.cells[row - i][col - i];
-			if (lastCell.getPlayer() == cell.getPlayer())
-			{
-				numDisc++;
-				if (numDisc >= 4)
-					return true;
-			}
+			if (lastCell.getPlayer() != cell.getPlayer())
+				break;
+			
+			numDisc++;
 		}
+		
+		if (numDisc >= 4)
+			return true;
 		
 		return false;
 	}
