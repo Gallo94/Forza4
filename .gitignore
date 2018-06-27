@@ -1,7 +1,6 @@
-reated by https://www.gitignore.io/api/java,eclipse
+Created by https://www.gitignore.io/api/java,eclipse
 
 ### Eclipse ###
-
 .metadata
 bin/
 tmp/
@@ -76,7 +75,7 @@ local.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.ear
 *.zip
