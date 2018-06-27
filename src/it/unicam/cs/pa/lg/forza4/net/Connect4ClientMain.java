@@ -12,14 +12,19 @@ import org.apache.commons.cli.ParseException;
 
 public class Connect4ClientMain 
 {
-	static InetAddress server;
+	
+	private static InetAddress server;
+	public enum ClientMode { HUMAN,	AI }
+	private static ClientMode clientMode;
+	
+	
 	public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException
 	{
 		server = InetAddress.getByName("localhost");
 		
 		parseCommandLine(args);
 		
-		Connect4Client client = new Connect4Client(server.getHostAddress(), 9001);
+		Connect4Client client = new Connect4Client(server.getHostAddress(), 9001, clientMode);
 		client.start();
 	}
 	
@@ -27,6 +32,10 @@ public class Connect4ClientMain
 	{
         Options options = new Options();
 
+        Option mode = new Option("mode", true, "human or ai");
+        mode.setRequired(true);
+        options.addOption(mode);
+        
         Option address = new Option("server", true, "server address");
         address.setRequired(false);
         options.addOption(address);
@@ -40,6 +49,20 @@ public class Connect4ClientMain
 
 			if(cmd.hasOption("server"))
 				server = InetAddress.getByName(cmd.getOptionValue("server"));
+			
+			if (cmd.hasOption("mode"))
+			{
+				String value = cmd.getOptionValue("mode");
+				if (value.equals("human"))
+					clientMode = ClientMode.HUMAN;
+				else if (value.equals("ai"))
+					clientMode = ClientMode.AI;
+				else
+				{
+					System.err.println("Wrong argument. Choose between 'human' or 'ai'");
+					System.exit(-1);
+				}
+			}
 				
 		}
         catch (ParseException e)

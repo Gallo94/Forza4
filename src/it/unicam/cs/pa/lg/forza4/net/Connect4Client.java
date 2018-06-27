@@ -13,6 +13,7 @@ import it.unicam.cs.pa.lg.forza4.MessageType;
 import it.unicam.cs.pa.lg.forza4.Player;
 import it.unicam.cs.pa.lg.forza4.PlayerRandom;
 import it.unicam.cs.pa.lg.forza4.PrintUtils;
+import it.unicam.cs.pa.lg.forza4.net.Connect4ClientMain.ClientMode;
 
 public class Connect4Client
 {
@@ -20,12 +21,15 @@ public class Connect4Client
 	private Socket socket = null;
 	private Player player;
 	private Grid grid;
+	private ClientMode mode;
 
 	// Message attributes
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
 	
-	public Connect4Client(final String server, final int port)
+	public Connect4Client(final String server, final int port, final ClientMode mode)
 	{
+		this.mode = mode;
+		
 		try
 		{
 			connectToServer(server, port);
@@ -134,8 +138,7 @@ public class Connect4Client
 		socket = new Socket(server, PORT);
 		
 		byte playerId = readPlayerId();
-//		this.player = new PlayerRandom(playerId);
-		this.player = new PlayerHuman(playerId);
+		this.player = (this.mode == ClientMode.HUMAN) ? new PlayerHuman(playerId) : new PlayerRandom(playerId);
 		System.out.println("Player ID: " + this.player.getId());
 	}
 	
