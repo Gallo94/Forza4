@@ -4,6 +4,9 @@ import java.io.PrintStream;
 
 public class PrintUtils
 {
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_RED = "\u001B[31m";
+	
 	public static void printField(PrintStream writer, final Grid grid)
 	{
 		int width = Grid.COLUMNS;
@@ -31,12 +34,18 @@ public class PrintUtils
 	private static void printRow(PrintStream writer, int row, final Grid grid)
 	{
 		writer.print(String.format("%4d", row ));
-
 		int width = Grid.COLUMNS;
+
+		String disc = " ";
 		for (int i = 0; i < width; i++)
 		{
+			if (!grid.getCells()[row][i].isEmpty())
+			{
+				byte id = grid.getCells()[row][i].getPlayer().getId();
+				disc = (id == 1) ? ANSI_RED + "X" + ANSI_RESET : "O"; 
+			}
 			writer.print("|");
-			writer.print(" " + (!grid.getCells()[row][i].isEmpty() ? grid.getCells()[row][i].getPlayer().getId() : " ") + " ");
+			writer.print(" " + (!grid.getCells()[row][i].isEmpty() ? disc : " ") + " ");
 		}
 		writer.println("|");
 	}
