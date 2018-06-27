@@ -139,16 +139,19 @@ public class PlayerChannel
 		case P0_WON:
 			{
 				writeMessage(MessageType.GAME_OVER, (byte) 0);
+				writeGrid();
 				break;
 			}
 		case P1_WON:
 			{
 				writeMessage(MessageType.GAME_OVER, (byte) 1);
+				writeGrid();
 				break;
 			}
 		case DRAW:
 			{
 				writeMessage(MessageType.GAME_OVER, (byte) 2);
+				writeGrid();
 				break;
 			}
 		case IDLE:

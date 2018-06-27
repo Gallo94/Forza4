@@ -111,6 +111,9 @@ public class Connect4Client
 						else
 							System.out.println("You Lose!");
 						
+						this.grid = readGrid();
+						PrintUtils.printField(System.out, grid);
+
 						gameOver = true;
 						
 						break;
