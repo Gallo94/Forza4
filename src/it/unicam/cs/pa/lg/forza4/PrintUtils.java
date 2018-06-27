@@ -25,7 +25,7 @@ public class PrintUtils
 
 	private static void printRowDelimiter(PrintStream writer, int size)
 	{
-		writer.print("    ");
+		writer.print("     ");
 		for( int i=0 ; i<size ; i++ ) {
 			writer.print("+---");
 		}
@@ -34,9 +34,9 @@ public class PrintUtils
 	
 	private static void printRow(PrintStream writer, int row, final Grid grid)
 	{
-		writer.print(String.format("%4d", row ));
+		writer.print(String.format("%4d ", row ));
+		
 		int width = Grid.COLUMNS;
-
 		String disc = " ";
 		for (int i = 0; i < width; i++)
 		{
@@ -52,7 +52,7 @@ public class PrintUtils
 	}
 	
 	private static void printColumnsHeader(PrintStream writer, int width) {
-		writer.print("   ");
+		writer.print("    ");
 		for( int i=0 ; i<width ; i++ ) {
 			writer.print(String.format("%4d", i));
 		}
