@@ -5,7 +5,8 @@ import java.io.PrintStream;
 public class PrintUtils
 {
 	public static final String ANSI_RESET = "\u001B[0m";
-	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_RED = "\u001b[41;1m";
+	public static final String ANSI_GREEN = "\u001b[42;1m";
 	
 	public static void printField(PrintStream writer, final Grid grid)
 	{
@@ -21,7 +22,7 @@ public class PrintUtils
 		
 		printRowDelimiter(writer,width);
 	}
-	
+
 	private static void printRowDelimiter(PrintStream writer, int size)
 	{
 		writer.print("    ");
@@ -42,7 +43,7 @@ public class PrintUtils
 			if (!grid.getCells()[row][i].isEmpty())
 			{
 				byte id = grid.getCells()[row][i].getPlayer().getId();
-				disc = (id == 1) ? ANSI_RED + "X" + ANSI_RESET : "O"; 
+				disc = (id == 1) ? ANSI_RED + "X" + ANSI_RESET : ANSI_GREEN + "O" + ANSI_RESET; 
 			}
 			writer.print("|");
 			writer.print(" " + (!grid.getCells()[row][i].isEmpty() ? disc : " ") + " ");
