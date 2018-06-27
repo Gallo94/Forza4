@@ -1,7 +1,11 @@
 package it.unicam.cs.pa.lg.forza4;
 
 import java.io.Serializable;
-
+/**
+ * Vengono dichiarati il name, l'ID del Player
+ * 
+ * @author Luca
+ */
 public abstract class Player implements Serializable
 {
 	/**

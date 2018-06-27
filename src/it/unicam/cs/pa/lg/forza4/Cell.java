@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 public class Cell implements Serializable
 {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -8885311864378222102L;
 	
 	public static final byte INVALID_COORD = -1;

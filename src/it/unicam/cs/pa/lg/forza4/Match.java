@@ -2,7 +2,13 @@ package it.unicam.cs.pa.lg.forza4;
 
 import java.util.Random;
 
-// Manager della partita
+/**
+ * Match è il manager del gioco.
+ * Gestisce lo stato della partita, i turni, la vittoria ed il pareggio
+ * Abbiamo il riferimento del giocatore corrente e della griglia
+ * 
+ * @author Luca
+ */
 public class Match
 {
 	enum MatchStatus
@@ -26,7 +32,7 @@ public class Match
 	{
 		grid = new Grid();
 		
-		// First to play
+		// Who is first player?
 		Random rng = new Random(System.currentTimeMillis());
 		curPlayer = rng.nextInt(1);
 		status = curPlayer == 0 ? MatchStatus.P0_TURN : MatchStatus.P1_TURN;

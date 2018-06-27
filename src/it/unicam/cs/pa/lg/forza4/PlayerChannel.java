@@ -8,9 +8,17 @@ import java.net.Socket;
 import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.Match.MatchStatus;
 
+/**
+ * Instanziamo un canale di comunicazione tra
+ * client e server. Ogni client avrà il suo PlayerChannel
+ * cioè un proprio thread.
+ * 
+ * @author Luca
+ */
+
 public class PlayerChannel
 {	
-	public final static int MAX_MESSAGE_LEN = 2; // Byte
+	public final static int MAX_MESSAGE_LEN = 2; // byte
 	private Socket socket;
 	private Player player;
 	private Match match;
@@ -49,7 +57,13 @@ public class PlayerChannel
 		}
 	}
 	
-	// Lettura del messaggio dal client
+	/**
+	 * Il Client legge il messaggio inviato dal Server
+	 * 
+	 * @return message
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private Message readMessage() throws IOException, ClassNotFoundException
 	{
 		Message message = null;
@@ -68,7 +82,13 @@ public class PlayerChannel
 		return message;
 	}
 	
-	// Scrive messaggio del Server per il Client
+	/**
+	 * Il messaggio per il Client viene serializzato
+	 * 
+	 * @param type tipo ID del Player
+	 * @param data dato Turni, Mosse, Game Over
+	 * @throws IOException
+	 */
 	private void writeMessage(final byte type, final byte data) throws IOException
 	{
 		Message message = new Message(type, data);
@@ -76,13 +96,23 @@ public class PlayerChannel
 		out.writeObject(message);
 	}
 	
+	/**
+	 * Viene inviata la griglia dal Server al Client 
+	 * 
+	 * @throws IOException
+	 */
 	private void writeGrid() throws IOException
 	{
 		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 		out.writeObject(this.match.getGrid());
 	}
 	
-	// Elaborazione comandi del Client sul Server
+	/**
+	 * Vengono elaborati i comandi inviati dal Client sul Server
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private void processPlayerInput() throws IOException, ClassNotFoundException
 	{
 		Message message = readMessage();
@@ -114,7 +144,13 @@ public class PlayerChannel
 		}
 	}
 	
-	// Invio dello stato al Client
+	/**
+	 * Dopo l'elaborazione del comando, il Server
+	 * invia lo stato e la griglia ai Client
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private void writeResponse() throws IOException, ClassNotFoundException
 	{
 		MatchStatus status = match.getStatus();
@@ -157,11 +193,22 @@ public class PlayerChannel
 		}
 	}
 	
+	/**
+	 * Viene restituito ID del Player che verrà 
+	 * 
+	 * @throws IOException
+	 */
 	private void writePlayerId() throws IOException
 	{
 		writeMessage(MessageType.PLAYER_ID, this.player.getId());
 	}
 	
+	/**
+	 * Il Player compie una mossa indicando la colonna
+	 * 
+	 * @param col colonna della griglia
+	 * @return
+	 */
 	private boolean makeMove(byte col)
 	{
 		return player.placeDisc(this.match.getGrid(), col);

@@ -28,6 +28,13 @@ public class Grid implements Serializable
 		return this.cells;
 	}
 	
+	/**
+	 * Aggiunge il disco del relativo player nella colonna
+	 * 
+	 * @param player giocatore corrente
+	 * @param col colonna della griglia
+	 * @return l'aggiunta di un disco
+	 */
 	public boolean addDisc(Player player, final byte col)
 	{
 		for (int i = ROWS - 1; i >= 0; i--)
@@ -50,22 +57,48 @@ public class Grid implements Serializable
 		
 		return false;
 	}
-	
+	/**
+	 * Controlla che la griglia sia completa
+	 * 
+	 * @return numero massimo di dischi inseriti, griglia completa
+	 */
 	public boolean isCompleted()
 	{
 		return disc_counter == MAX_DISCS;
 	}
 	
+	/**
+	 * Verifica che il disco venga inserito all'interno dei margini
+	 * della griglia.
+	 * 
+	 * @param row riga della griglia
+	 * @param col colonna della griglia
+	 * @return i limiti della griglia 
+	 */
 	public boolean isIndexInBound(final int row, final int col)
 	{
 		return (row >= 0 && row < ROWS) && (col >= 0 && col < COLUMNS);
 	}
 	
+	/**
+	 * Verifica la vittoria in verticale, orizzontale e diagonale.
+	 * 
+	 * @param row riga della griglia
+	 * @param col colonna della griglia
+	 * @return il tipo di vittoria
+	 */
 	public boolean checkWin(final int row, final int col)
 	{	
 		return checkVerticalWin(row, col) || checkHorizontalWin(row, col) || checkDiagonals(row, col);
 	}
 	
+	/**
+	 * Verifica la vittoria in verticale.
+	 * 
+	 * @param row  riga della griglia
+	 * @param col  colonna della griglia
+	 * @return la vittoria in verticale
+	 */
 	private boolean checkVerticalWin(final int row, final int col)
 	{
 		Cell lastCell = this.cells[row][col];
@@ -89,6 +122,13 @@ public class Grid implements Serializable
 		return false;
 	}
 	
+	/**
+	 * Verifica la vittoria in orizzontale.
+	 * 
+	 * @param row riga della griglia
+	 * @param col colonna della griglia
+	 * @return la vittoria in orizzontale
+	 */
 	private boolean checkHorizontalWin(final int row, final int col)
 	{
 		Cell lastCell = this.cells[row][col];
@@ -127,7 +167,14 @@ public class Grid implements Serializable
 		
 		return false;
 	}
-	
+	/**
+	 * Verifica la vittoria in diagonale (top left - bottom right) e
+	 * (top right - bottom left)
+	 * 
+	 * @param row riga della griglia
+	 * @param col colonna della griglia
+	 * @return vittoria in diagonale(TL-BR o TR-BL) 
+	 */
 	private boolean checkDiagonals(final int row, final int col)
 	{
 		Cell lastCell = this.cells[row][col];

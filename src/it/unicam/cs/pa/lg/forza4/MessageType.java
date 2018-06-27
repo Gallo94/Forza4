@@ -1,5 +1,11 @@
 package it.unicam.cs.pa.lg.forza4;
 
+/**
+ * Vengono dichiarati i vari tipi di messaggi scambiati
+ * dal server al client e viceversa
+ * 
+ * @author Luca
+ */
 public class MessageType
 {
 	// Message: server to client
