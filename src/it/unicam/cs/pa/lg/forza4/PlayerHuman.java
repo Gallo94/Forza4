@@ -1,10 +1,11 @@
 package it.unicam.cs.pa.lg.forza4;
 
-import java.net.InetAddress;
 import java.util.Scanner;
 
 public class PlayerHuman extends Player
 {	
+	private static final long serialVersionUID = -1496290258391331642L;
+
 	public PlayerHuman(byte id)
 	{
 		super(id);

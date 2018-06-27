@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import it.unicam.cs.pa.lg.forza4.Grid;
 import it.unicam.cs.pa.lg.forza4.Match;
 import it.unicam.cs.pa.lg.forza4.Player;
 import it.unicam.cs.pa.lg.forza4.PlayerHuman;

@@ -1,11 +1,8 @@
 package it.unicam.cs.pa.lg.forza4;
 
-import java.io.FileDescriptor;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintStream;
 import java.net.Socket;
 
 import it.unicam.cs.pa.lg.forza4.Message;
