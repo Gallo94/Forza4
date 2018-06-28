@@ -3,7 +3,7 @@ package it.unicam.cs.pa.lg.forza4;
 import java.util.Random;
 
 /**
- * Match è il manager del gioco.
+ * Match e' il manager del gioco.
  * Gestisce lo stato della partita, i turni, la vittoria ed il pareggio
  * Abbiamo il riferimento del giocatore corrente e della griglia
  * 

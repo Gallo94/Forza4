@@ -10,8 +10,8 @@ import it.unicam.cs.pa.lg.forza4.Match.MatchStatus;
 
 /**
  * Instanziamo un canale di comunicazione tra
- * client e server. Ogni client avrà il suo PlayerChannel
- * cioè un proprio thread.
+ * client e server. Ogni client avra' il suo PlayerChannel
+ * cioe' un proprio thread.
  * 
  * @author Luca
  */
@@ -194,7 +194,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Viene restituito ID del Player che verrà 
+	 * Viene restituito ID del Player che verra' 
 	 * 
 	 * @throws IOException
 	 */
