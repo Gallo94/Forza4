@@ -11,6 +11,7 @@ import it.unicam.cs.pa.lg.forza4.Grid;
 import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.MessageType;
 import it.unicam.cs.pa.lg.forza4.Player;
+import it.unicam.cs.pa.lg.forza4.PlayerAI;
 import it.unicam.cs.pa.lg.forza4.PlayerRandom;
 import it.unicam.cs.pa.lg.forza4.PrintUtils;
 import it.unicam.cs.pa.lg.forza4.net.Connect4ClientMain.ClientMode;
@@ -29,6 +30,7 @@ public class Connect4Client
 	public Connect4Client(final String server, final int port, final ClientMode mode)
 	{
 		this.mode = mode;
+		this.grid = new Grid(); // HACK! necessaria al momento per player AI
 		
 		try
 		{
@@ -64,14 +66,14 @@ public class Connect4Client
 							try
 							{
 								boolean isValid = false;
-								do
-								{										
+//								do
+//								{										
 									PrintUtils.printField(System.out, grid);
 									byte input = player.input();
 									
-									writeMessage(MessageType.PLAYER_MOVE, input);
-									
+									writeMessage(MessageType.PLAYER_MOVE, input);								
 									Message returnMessage = readMessage();
+									
 									this.grid = readGrid();
 
 									if (returnMessage.getType() == MessageType.VALID_PLAY)
@@ -80,8 +82,8 @@ public class Connect4Client
 										if (!isValid)
 											System.out.println("Bad play");
 									}
-								}
-								while (!isValid);
+//								}
+//								while (!isValid);
 								
 								System.out.println("Wait your turn!");
 							}
@@ -138,7 +140,7 @@ public class Connect4Client
 		socket = new Socket(server, PORT);
 		
 		byte playerId = readPlayerId();
-		this.player = (this.mode == ClientMode.HUMAN) ? new PlayerHuman(playerId) : new PlayerRandom(playerId);
+		this.player = (this.mode == ClientMode.HUMAN) ? new PlayerHuman(playerId) : new PlayerAI(playerId, grid);
 		System.out.println("Player ID: " + this.player.getId());
 	}
 	

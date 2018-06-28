@@ -123,17 +123,15 @@ public class PlayerChannel
 		{	
 			boolean success = false;
 			
-			do
-			{
-				byte col = message.getData();
-				success = makeMove(col);
-				writeMessage(MessageType.VALID_PLAY, (byte)(success ? 1 : 0));
-				writeGrid();
-				
-			} while (!success);
+			byte col = message.getData();
+			success = makeMove(col);		
+			writeMessage(MessageType.VALID_PLAY, (byte)(success ? 1 : 0));
+			writeGrid();
 			
 			match.checkVictory();
-			match.switchTurn();
+			
+			if (success)
+				match.switchTurn();
 		
 			break;
 		}
