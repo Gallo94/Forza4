@@ -42,7 +42,10 @@ public class PlayerChannel
 								
 				if (match.getGrid().won)
 				{
-					System.out.println("Player" + this.match.getWinPlayer() + " won!");
+					if (player.id == this.match.getWinPlayer())
+						System.out.println("Player" + player.id + " won!");
+					else
+						System.out.println("Player" + player.id + " lose!");						
 					break;
 				}
 				

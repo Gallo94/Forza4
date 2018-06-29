@@ -12,7 +12,6 @@ import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.MessageType;
 import it.unicam.cs.pa.lg.forza4.Player;
 import it.unicam.cs.pa.lg.forza4.PlayerAI;
-import it.unicam.cs.pa.lg.forza4.PlayerRandom;
 import it.unicam.cs.pa.lg.forza4.PrintUtils;
 import it.unicam.cs.pa.lg.forza4.net.Connect4ClientMain.ClientMode;
 
