@@ -17,4 +17,6 @@ public class PlayerRandom extends Player
 		Random rng = new Random(System.currentTimeMillis());
 		return (byte) rng.nextInt(6);
 	}
+	
+	
 }

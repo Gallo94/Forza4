@@ -8,10 +8,11 @@ import java.io.Serializable;
  */
 public abstract class Player implements Serializable
 {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 3324651541378196476L;
+	public static final char CIRCLE = 'O';
+	public static final char CROSS = 'X';
+	public static final char EMPTY = ' ';
 	
 	protected String name;
 	protected byte id;
@@ -30,6 +31,11 @@ public abstract class Player implements Serializable
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	public char getDisc()
+	{
+		return this.id == 0 ? CIRCLE : CROSS;
 	}
 	
 	public boolean placeDisc(Grid grid, final byte col)

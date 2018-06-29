@@ -47,19 +47,21 @@ public class PrintUtils
 	
 	private static void printRow(PrintStream writer, int row, final Grid grid)
 	{
-		writer.print(String.format("%4d ", row ));
+		writer.print(String.format("%4d ", row));
 		
 		int width = Grid.COLUMNS;
 		String disc = " ";
 		for (int i = 0; i < width; i++)
 		{
-			if (!grid.getCells()[row][i].isEmpty())
-			{
-				byte id = grid.getCells()[row][i].getPlayer().getId();
-				disc = (id == 1) ? ANSI_RED + "X" + ANSI_RESET : ANSI_GREEN + "O" + ANSI_RESET; 
-			}
+			if (grid.getCells()[row][i] == Player.CIRCLE)
+				disc = ANSI_GREEN + Player.CIRCLE + ANSI_RESET;
+			else if (grid.getCells()[row][i] == Player.CROSS) 
+				disc = ANSI_RED + Player.CROSS + ANSI_RESET;
+			else
+				disc = Player.EMPTY + "";
+				
 			writer.print("|");
-			writer.print(" " + (!grid.getCells()[row][i].isEmpty() ? disc : " ") + " ");
+			writer.print(" " + disc + " ");
 		}
 		writer.println("|");
 	}
