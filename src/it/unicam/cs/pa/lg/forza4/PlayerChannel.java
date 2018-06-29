@@ -125,7 +125,7 @@ public class PlayerChannel
 			
 			int col = message.getData();
 			success = makeMove(col);		
-			writeMessage(MessageType.VALID_PLAY, (byte)(success ? 1 : 0));
+			writeMessage(MessageType.VALID_PLAY, (success ? 1 : 0));
 			writeGrid();
 			
 			match.checkVictory();
@@ -157,31 +157,31 @@ public class PlayerChannel
 		{
 		case P0_TURN:
 			{
-				writeMessage(MessageType.PLAYER_TURN, (byte) 0);
+				writeMessage(MessageType.PLAYER_TURN, 0);
 				writeGrid();
 				break;
 			}
 		case P1_TURN:
 			{
-				writeMessage(MessageType.PLAYER_TURN, (byte) 1);
+				writeMessage(MessageType.PLAYER_TURN, 1);
 				writeGrid();
 				break;
 			}
 		case P0_WON:
 			{
-				writeMessage(MessageType.GAME_OVER, (byte) 0);
+				writeMessage(MessageType.GAME_OVER, 0);
 				writeGrid();
 				break;
 			}
 		case P1_WON:
 			{
-				writeMessage(MessageType.GAME_OVER, (byte) 1);
+				writeMessage(MessageType.GAME_OVER, 1);
 				writeGrid();
 				break;
 			}
 		case DRAW:
 			{
-				writeMessage(MessageType.GAME_OVER, (byte) 2);
+				writeMessage(MessageType.GAME_OVER, 2);
 				writeGrid();
 				break;
 			}

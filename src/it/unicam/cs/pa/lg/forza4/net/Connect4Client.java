@@ -95,7 +95,7 @@ public class Connect4Client
 						{
 							try
 							{
-								writeMessage(MessageType.PLAYER_WAIT, (byte)0);
+								writeMessage(MessageType.PLAYER_WAIT, 0);
 							}
 							catch (IOException e)
 							{

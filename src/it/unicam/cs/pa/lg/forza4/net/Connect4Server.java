@@ -38,7 +38,7 @@ public class Connect4Server
 				Socket client = server.accept();
 				clients[numPlayers] = client;
 				
-				Player player = new PlayerHuman((byte) numPlayers);
+				Player player = new PlayerHuman(numPlayers);
 				players[numPlayers] = player;
 				
 				numPlayers++;
