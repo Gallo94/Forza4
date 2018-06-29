@@ -22,7 +22,7 @@ public class Connect4Client
 	public Connect4Client(final String server, final int port, final ClientMode mode)
 	{
 		this.mode = mode;
-		this.grid = new Grid(); // HACK! necessaria al momento per player AI
+		this.grid = new Grid(); 
 		
 		try
 		{
@@ -58,31 +58,28 @@ public class Connect4Client
 							try
 							{
 								boolean isValid = false;
-//								do
-//								{										
-									PrintUtils.printField(System.out, grid);
-									int input = player.input(this.grid);
-									
-									writeMessage(MessageType.PLAYER_MOVE, input);								
-									Message returnMessage = readMessage();
-									
-									this.grid = readGrid();
-									PrintUtils.printField(System.out, grid);
+								PrintUtils.printField(System.out, grid);
+								int input = player.input(this.grid);
+								
+								writeMessage(MessageType.PLAYER_MOVE, input);								
+								Message returnMessage = readMessage();
+								
+								this.grid = readGrid();
+								PrintUtils.printField(System.out, grid);
 
-									if (returnMessage.getType() == MessageType.VALID_PLAY)
-									{
-										isValid = returnMessage.getData() == 1 ? true : false;
-										if (!isValid)
-											System.out.println("Bad play");
-									}
-//								}
-//								while (!isValid);
+								if (returnMessage.getType() == MessageType.VALID_PLAY)
+								{
+									isValid = returnMessage.getData() == 1 ? true : false;
+									if (!isValid)
+										System.out.println("Bad play");
+								}
 								
 								System.out.println("Wait your turn!");
 							}
 							catch (IOException e)
 							{
 								e.printStackTrace();
+								System.exit(-1);
 							}
 						}
 						else
@@ -94,6 +91,7 @@ public class Connect4Client
 							catch (IOException e)
 							{
 								e.printStackTrace();
+								System.exit(-1);
 							}
 						}
 						
@@ -136,7 +134,7 @@ public class Connect4Client
 		this.player = (this.mode == ClientMode.HUMAN) ? new PlayerHuman(playerId) : new PlayerAI(playerId);
 		System.out.println("Player ID: " + this.player.getId());
 	}
-	
+		
 	public int readPlayerId() throws ClassNotFoundException, IOException
 	{
 		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -151,10 +149,21 @@ public class Connect4Client
 		return (Grid) in.readObject();
 	}
 	
-	public Message readResponse() throws ClassNotFoundException, IOException
+	public Message readResponse() throws IOException, ClassNotFoundException
 	{
-		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-		Message message = (Message) in.readObject();
+		ObjectInputStream in;
+		Message message = null;
+		try
+		{
+			in = new ObjectInputStream(socket.getInputStream());
+			message = (Message) in.readObject();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		
 		return message;
 	}
 	
