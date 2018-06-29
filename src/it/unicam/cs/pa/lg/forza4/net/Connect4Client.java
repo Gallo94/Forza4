@@ -11,6 +11,7 @@ import it.unicam.cs.pa.lg.forza4.Grid;
 import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.MessageType;
 import it.unicam.cs.pa.lg.forza4.Player;
+import it.unicam.cs.pa.lg.forza4.PlayerAI;
 import it.unicam.cs.pa.lg.forza4.PlayerRandom;
 import it.unicam.cs.pa.lg.forza4.PrintUtils;
 import it.unicam.cs.pa.lg.forza4.net.Connect4ClientMain.ClientMode;
@@ -68,7 +69,7 @@ public class Connect4Client
 //								do
 //								{										
 									PrintUtils.printField(System.out, grid);
-									int input = player.input();
+									int input = player.input(this.grid);
 									
 									writeMessage(MessageType.PLAYER_MOVE, input);								
 									Message returnMessage = readMessage();
@@ -139,7 +140,7 @@ public class Connect4Client
 		socket = new Socket(server, PORT);
 		
 		int playerId = readPlayerId();
-		this.player = (this.mode == ClientMode.HUMAN) ? new PlayerHuman(playerId) : new PlayerRandom(playerId);
+		this.player = (this.mode == ClientMode.HUMAN) ? new PlayerHuman(playerId) : new PlayerAI(playerId);
 		System.out.println("Player ID: " + this.player.getId());
 	}
 	

@@ -22,6 +22,7 @@ public class Match
 	}
 
 	private int curPlayer;
+	
 	private Grid grid;
 	MatchStatus status = MatchStatus.IDLE;
 	

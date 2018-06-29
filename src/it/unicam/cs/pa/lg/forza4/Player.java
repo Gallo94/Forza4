@@ -33,9 +33,9 @@ public abstract class Player implements Serializable
 		return this.name;
 	}
 	
-	public char getDisc()
+	public static char getDisc(int id)
 	{
-		return this.id == 0 ? CIRCLE : CROSS;
+		return id == 0 ? CIRCLE : CROSS;
 	}
 	
 	public boolean placeDisc(Grid grid, final int col)
@@ -43,5 +43,5 @@ public abstract class Player implements Serializable
 		return grid.addDisc(this, col);
 	}
 	
-	public abstract int input();
+	public abstract int input(final Grid grid);
 }

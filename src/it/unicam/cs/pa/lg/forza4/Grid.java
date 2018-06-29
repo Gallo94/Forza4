@@ -1,6 +1,7 @@
 package it.unicam.cs.pa.lg.forza4;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Grid implements Serializable
 {
@@ -39,14 +40,15 @@ public class Grid implements Serializable
 	 */
 	public boolean addDisc(Player player, final int col)
 	{
-		for (int i = ROWS - 1; i >= 0; i--)
+		int id = player.getId();
+		for (int row = ROWS - 1; row >= 0; row--)
 		{
-			if (this.cells[i][col] == Player.EMPTY && isIndexInBound(i, col))
+			if (this.cells[row][col] == Player.EMPTY && isIndexInBound(row, col))
 			{
-				this.cells[i][col] = player.getDisc();
+				this.cells[row][col] = Player.getDisc(id);
 				this.numDisc++;
 				
-				won = checkWin(player, i, col);
+				won = checkWin(id, row, col);
 				
 				return true;
 			}
@@ -86,7 +88,7 @@ public class Grid implements Serializable
 	 * @param col colonna della griglia
 	 * @return il tipo di vittoria
 	 */
-	public boolean checkWin(Player player, final int row, final int col)
+	public boolean checkWin(final int player, final int row, final int col)
 	{	
 		return checkVerticalWin(player, row, col) || checkHorizontalWin(player, row, col) || checkDiagonals(player, row, col);
 	}
@@ -98,7 +100,7 @@ public class Grid implements Serializable
 	 * @param col  colonna della griglia
 	 * @return la vittoria in verticale
 	 */
-	private boolean checkVerticalWin(Player player, final int row, final int col)
+	private boolean checkVerticalWin(final int player, final int row, final int col)
 	{
 		// Vertical check
 		int numDisc = 1;
@@ -107,7 +109,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row + i, col))
 				break;
 			
-			if (player.getDisc() != this.cells[row + i][col])
+			if (Player.getDisc(player) != this.cells[row + i][col])
 				break;
 
 			numDisc++;
@@ -127,7 +129,7 @@ public class Grid implements Serializable
 	 * @param col colonna della griglia
 	 * @return la vittoria in orizzontale
 	 */
-	private boolean checkHorizontalWin(Player player, final int row, final int col)
+	private boolean checkHorizontalWin(final int player, final int row, final int col)
 	{
 		// Controllo a sinistra dell'ultima posizione usata
 		int numDisc = 1;
@@ -136,7 +138,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row, col - i))
 				break;
 			
-			if (player.getDisc() != this.cells[row][col - i])
+			if (Player.getDisc(player) != this.cells[row][col - i])
 				break;
 
 			numDisc++;
@@ -151,7 +153,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row, col + i))
 				break;
 			
-			if (player.getDisc() != this.cells[row][col + i]) // FIXME
+			if (Player.getDisc(player) != this.cells[row][col + i]) // FIXME
 				break;
 			
 			numDisc++;
@@ -170,7 +172,7 @@ public class Grid implements Serializable
 	 * @param col colonna della griglia
 	 * @return vittoria in diagonale(TL-BR o TR-BL) 
 	 */
-	private boolean checkDiagonals(Player player, final int row, final int col)
+	private boolean checkDiagonals(final int player, final int row, final int col)
 	{	
 		// da top-right a bottom-left
 		int numDisc = 1;
@@ -179,7 +181,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row - i, col + i))
 				break;
 			
-			if (player.getDisc() != this.cells[row - i][col + i])
+			if (Player.getDisc(player) != this.cells[row - i][col + i])
 				break;
 			
 			numDisc++;
@@ -193,7 +195,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row + i, col - i))
 				break;
 			
-			if (player.getDisc() != this.cells[row + i][col - i])
+			if (Player.getDisc(player) != this.cells[row + i][col - i])
 				break;
 			
 			numDisc++;
@@ -209,7 +211,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row + i, col + i))
 				break;
 			
-			if (player.getDisc() != this.cells[row + i][col + i])
+			if (Player.getDisc(player) != this.cells[row + i][col + i])
 				break;
 			
 			numDisc++;
@@ -223,7 +225,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row - i, col - i))
 				break;
 			
-			if (player.getDisc() != this.cells[row - i][col - i])
+			if (Player.getDisc(player) != this.cells[row - i][col - i])
 				break;
 			
 			numDisc++;
@@ -233,5 +235,40 @@ public class Grid implements Serializable
 			return true;
 		
 		return false;
+	}
+	
+	public ArrayList<Integer> getAvailableColumns()
+	{
+		ArrayList<Integer> availableMoves = new ArrayList<>();
+		
+		for (int col = 0; col < COLUMNS; col++)
+		{
+			int value = getAvailColumnPositions(col);
+			if (value > 0)
+			{
+				availableMoves.add(col);
+			}
+		}
+		
+		return availableMoves;
+	}
+		
+	public int getAvailColumnPositions(final int col)
+	{
+		int positionsAvail = 0;
+		for (int row = 0; row < ROWS; row++)
+		{
+			if (cells[row][col] == Player.EMPTY)
+			{
+				positionsAvail++;
+			}
+		}
+		
+		return positionsAvail;
+	}
+	
+	public int getAvailRowIndex(final int col)
+	{
+		return getAvailColumnPositions(col) - 1;
 	}
 }

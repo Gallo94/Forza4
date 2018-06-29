@@ -12,7 +12,7 @@ public class PlayerHuman extends Player
 	}
 	
 	@Override
-	public int input()
+	public int input(final Grid grid)
 	{
 		System.out.println("Your turn!");
 		System.out.println("Insert column between 0-6: ");
