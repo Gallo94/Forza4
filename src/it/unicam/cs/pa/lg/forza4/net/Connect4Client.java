@@ -49,7 +49,7 @@ public class Connect4Client
 		{
 			// Ricezione dal server
 			Message imsg = null;
-			byte id = 0;
+			int id = 0;
 						
 			try
 			{			
@@ -68,7 +68,7 @@ public class Connect4Client
 //								do
 //								{										
 									PrintUtils.printField(System.out, grid);
-									byte input = player.input();
+									int input = player.input();
 									
 									writeMessage(MessageType.PLAYER_MOVE, input);								
 									Message returnMessage = readMessage();
@@ -138,12 +138,12 @@ public class Connect4Client
 	{
 		socket = new Socket(server, PORT);
 		
-		byte playerId = readPlayerId();
+		int playerId = readPlayerId();
 		this.player = (this.mode == ClientMode.HUMAN) ? new PlayerHuman(playerId) : new PlayerRandom(playerId);
 		System.out.println("Player ID: " + this.player.getId());
 	}
 	
-	public byte readPlayerId() throws ClassNotFoundException, IOException
+	public int readPlayerId() throws ClassNotFoundException, IOException
 	{
 		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 		Message message = (Message) in.readObject();
@@ -184,7 +184,7 @@ public class Connect4Client
 	}
 	
 	// Scrive messaggio del Server per il Client
-	private void writeMessage(final byte type, final byte data) throws IOException
+	private void writeMessage(final int type, final int data) throws IOException
 	{
 		Message message = new Message(type, data);
 		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());

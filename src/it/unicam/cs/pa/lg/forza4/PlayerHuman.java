@@ -6,18 +6,18 @@ public class PlayerHuman extends Player
 {	
 	private static final long serialVersionUID = -1496290258391331642L;
 
-	public PlayerHuman(byte id)
+	public PlayerHuman(int id)
 	{
 		super(id);
 	}
 	
 	@Override
-	public byte input()
+	public int input()
 	{
 		System.out.println("Your turn!");
 		System.out.println("Insert column between 0-6: ");
 		Scanner scanner = new Scanner(System.in);
-		byte value;
+		int value;
 		do
 		{
 			while (!scanner.hasNextByte())

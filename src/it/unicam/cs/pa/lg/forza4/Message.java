@@ -13,21 +13,21 @@ public class Message implements Serializable
 {
 	private static final long serialVersionUID = 7097116029864916962L;
 	
-	private byte type;
-	private byte data;
+	private int type;
+	private int data;
 	
-	public Message(byte type, byte data)
+	public Message(int type, int data)
 	{
 		this.type = type;
 		this.data = data;
 	}
 	
-	public byte getType()
+	public int getType()
 	{
 		return this.type;
 	}
 	
-	public byte getData()
+	public int getData()
 	{
 		return this.data;
 	}

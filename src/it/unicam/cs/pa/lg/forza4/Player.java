@@ -15,15 +15,15 @@ public abstract class Player implements Serializable
 	public static final char EMPTY = ' ';
 	
 	protected String name;
-	protected byte id;
+	protected int id;
 	
-	public Player(final byte id)
+	public Player(final int id)
 	{
 		this.name = String.valueOf(id);
 		this.id = id;
 	}
 	
-	public byte getId()
+	public int getId()
 	{
 		return this.id;
 	}
@@ -38,10 +38,10 @@ public abstract class Player implements Serializable
 		return this.id == 0 ? CIRCLE : CROSS;
 	}
 	
-	public boolean placeDisc(Grid grid, final byte col)
+	public boolean placeDisc(Grid grid, final int col)
 	{
 		return grid.addDisc(this, col);
 	}
 	
-	public abstract byte input();
+	public abstract int input();
 }

@@ -89,7 +89,7 @@ public class PlayerChannel
 	 * @param data dato Turni, Mosse, Game Over
 	 * @throws IOException
 	 */
-	private void writeMessage(final byte type, final byte data) throws IOException
+	private void writeMessage(final int type, final int data) throws IOException
 	{
 		Message message = new Message(type, data);
 		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -123,7 +123,7 @@ public class PlayerChannel
 		{	
 			boolean success = false;
 			
-			byte col = message.getData();
+			int col = message.getData();
 			success = makeMove(col);		
 			writeMessage(MessageType.VALID_PLAY, (byte)(success ? 1 : 0));
 			writeGrid();
@@ -207,7 +207,7 @@ public class PlayerChannel
 	 * @param col colonna della griglia
 	 * @return
 	 */
-	private boolean makeMove(byte col)
+	private boolean makeMove(int col)
 	{
 		return player.placeDisc(this.match.getGrid(), col);
 	}

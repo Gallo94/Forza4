@@ -37,7 +37,7 @@ public class Grid implements Serializable
 	 * @param col colonna della griglia
 	 * @return l'aggiunta di un disco
 	 */
-	public boolean addDisc(Player player, final byte col)
+	public boolean addDisc(Player player, final int col)
 	{
 		for (int i = ROWS - 1; i >= 0; i--)
 		{
