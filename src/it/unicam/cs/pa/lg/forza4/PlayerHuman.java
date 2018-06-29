@@ -2,10 +2,20 @@ package it.unicam.cs.pa.lg.forza4;
 
 import java.util.Scanner;
 
+/**
+ * Rapresent a Human player
+ * 
+ * @author Luca
+ */
 public class PlayerHuman extends Player
 {	
 	private static final long serialVersionUID = -1496290258391331642L;
 
+	/**
+	 * Create a human player
+	 * 
+	 * @param id ID player
+	 */
 	public PlayerHuman(int id)
 	{
 		super(id);

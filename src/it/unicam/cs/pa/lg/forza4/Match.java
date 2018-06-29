@@ -3,9 +3,7 @@ package it.unicam.cs.pa.lg.forza4;
 import java.util.Random;
 
 /**
- * Match e' il manager del gioco.
- * Gestisce lo stato della partita, i turni, la vittoria ed il pareggio
- * Abbiamo il riferimento del giocatore corrente e della griglia
+ * Rapresent a game's manager
  * 
  * @author Luca
  */
@@ -28,7 +26,7 @@ public class Match
 	
 	private int winPlayer;
 	
-	
+	/** Create a match */
 	public Match()
 	{
 		grid = new Grid();
@@ -41,6 +39,7 @@ public class Match
 		winPlayer = -1;
 	}
 	
+	/** Switch turn to player1 or player0 */
 	public void switchTurn()
 	{
 		if (!this.grid.won)
@@ -50,6 +49,7 @@ public class Match
 		}
 	}
 	
+	/** Check win player1 or player0 */
 	public void checkVictory()
 	{	
 		if (this.grid.won)
@@ -59,6 +59,7 @@ public class Match
 		}
 	}
 	
+	/** Check draw */
 	public void checkDraw()
 	{
 		// FIXME
@@ -68,21 +69,41 @@ public class Match
 		status = MatchStatus.DRAW;
 	}
 	
+	/**
+	 *  Get the match's status
+	 * 
+	 * @return status
+	 */
 	public MatchStatus getStatus()	
 	{
 		return status;
 	}
 	
+	/**
+	 * Get the match's current player
+	 * 
+	 * @return current player
+	 */
 	public int getCurrentPlayer()
 	{
 		return curPlayer;
 	}
 	
+	/**
+	 * Get the match's win player
+	 * 
+	 * @return win player
+	 */
 	public int getWinPlayer()
 	{
 		return winPlayer;
 	}
 	
+	/**
+	 * Get the match's grid
+	 * 
+	 * @return grid
+	 */
 	public Grid getGrid()
 	{
 		return this.grid;

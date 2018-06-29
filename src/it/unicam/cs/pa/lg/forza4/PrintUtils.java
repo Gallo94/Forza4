@@ -1,26 +1,27 @@
 package it.unicam.cs.pa.lg.forza4;
 
 import java.io.PrintStream;
+
 /**
- * Viene dichiarata e stampata a video la griglia del gioco
+ * Print match's grid
  * 
  * @author Luca
  */
 public class PrintUtils
 {
-	/**
-	 * Reset escape character
-	 */
+	/** Reset escape character */
 	public static final String ANSI_RESET = "\u001B[0m";
-	/**
-	 * Bright red escape character
-	 */
+	/** Bright red escape character */
 	public static final String ANSI_RED = "\u001b[41;1m";
-	/**
-	 * Bright green escape character
-	 */
+	/** Bright green escape character */
 	public static final String ANSI_GREEN = "\u001b[42;1m";
 	
+	/**
+	 * Print grid
+	 * 
+	 * @param writer
+	 * @param grid match's grid
+	 */
 	public static void printField(PrintStream writer, final Grid grid)
 	{
 		int width = Grid.COLUMNS;
@@ -36,6 +37,12 @@ public class PrintUtils
 		printRowDelimiter(writer,width);
 	}
 
+	/**
+	 * Print border rows and upper/lower edges +---+ 
+	 * 
+	 * @param writer
+	 * @param size
+	 */
 	private static void printRowDelimiter(PrintStream writer, int size)
 	{
 		writer.print("     ");
@@ -45,8 +52,16 @@ public class PrintUtils
 		writer.println("+");
 	}
 	
+	/**
+	 * Print rows and side edges |  |
+	 * 
+	 * @param writer
+	 * @param row grid's rows
+	 * @param grid match's grid
+	 */
 	private static void printRow(PrintStream writer, int row, final Grid grid)
 	{
+		/** Print header for rows */
 		writer.print(String.format("%4d ", row));
 		
 		int width = Grid.COLUMNS;
@@ -66,6 +81,12 @@ public class PrintUtils
 		writer.println("|");
 	}
 	
+	/**
+	 * Print header for columns
+	 * 
+	 * @param writer
+	 * @param width grid's width
+	 */
 	private static void printColumnsHeader(PrintStream writer, int width) {
 		writer.print("    ");
 		for( int i=0 ; i<width ; i++ ) {

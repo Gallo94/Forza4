@@ -32,11 +32,12 @@ public class Grid implements Serializable
 	}
 	
 	/**
-	 * Aggiunge il disco del relativo player nella colonna
+	 * Add disc of the player in column
 	 * 
-	 * @param player giocatore corrente
-	 * @param col colonna della griglia
-	 * @return l'aggiunta di un disco
+	 * @param player current player
+	 * @param col column
+	 * @return true if addDisc is done,
+	 * 		   false otherwise
 	 */
 	public boolean addDisc(Player player, final int col)
 	{
@@ -58,10 +59,12 @@ public class Grid implements Serializable
 		
 		return false;
 	}
+	
 	/**
-	 * Controlla che la griglia sia completa
+	 * Check grid is full
 	 * 
-	 * @return numero massimo di dischi inseriti, griglia completa
+	 * @return true if grid is full,
+	 * 		   false otherwise
 	 */
 	public boolean isCompleted()
 	{
@@ -69,12 +72,12 @@ public class Grid implements Serializable
 	}
 	
 	/**
-	 * Verifica che il disco venga inserito all'interno dei margini
-	 * della griglia.
+	 * The disc is in bounds of the grid
 	 * 
-	 * @param row riga della griglia
-	 * @param col colonna della griglia
-	 * @return i limiti della griglia 
+	 * @param row
+	 * @param col
+	 * @return true if is in bounds,
+	 * 		   false otherwise
 	 */
 	public boolean isIndexInBound(final int row, final int col)
 	{
@@ -82,11 +85,11 @@ public class Grid implements Serializable
 	}
 	
 	/**
-	 * Verifica la vittoria in verticale, orizzontale e diagonale.
+	 * Check win in vertical, horizontal and diagonal 
 	 * 
-	 * @param row riga della griglia
-	 * @param col colonna della griglia
-	 * @return il tipo di vittoria
+	 * @param row
+	 * @param col
+	 * @return type of win
 	 */
 	public boolean checkWin(final int player, final int row, final int col)
 	{	
@@ -94,11 +97,12 @@ public class Grid implements Serializable
 	}
 	
 	/**
-	 * Verifica la vittoria in verticale.
+	 * Check win in vertical
 	 * 
-	 * @param row  riga della griglia
-	 * @param col  colonna della griglia
-	 * @return la vittoria in verticale
+	 * @param row
+	 * @param col
+	 * @return true if win in vertical,
+	 * 		   false otherwise
 	 */
 	private boolean checkVerticalWin(final int player, final int row, final int col)
 	{
@@ -119,19 +123,18 @@ public class Grid implements Serializable
 		
 		return false;
 	}
-
-
 	
 	/**
-	 * Verifica la vittoria in orizzontale.
+	 * Check win in horizontal
 	 * 
-	 * @param row riga della griglia
-	 * @param col colonna della griglia
-	 * @return la vittoria in orizzontale
+	 * @param row
+	 * @param col
+	 * @return true if win in horizontal,
+	 * 		   false otherwise
 	 */
 	private boolean checkHorizontalWin(final int player, final int row, final int col)
 	{
-		// Controllo a sinistra dell'ultima posizione usata
+		// Check last position to left
 		int numDisc = 1;
 		for (int i = 1; i <= 3; i++)
 		{
@@ -146,7 +149,7 @@ public class Grid implements Serializable
 				return true;
 		}
 		
-		// Controllo a destra dell'ultima posizione usata
+		// Check last position to right
 		numDisc = 1;
 		for (int i = 1; i <= 3; i++)
 		{
@@ -164,17 +167,19 @@ public class Grid implements Serializable
 		
 		return false;
 	}
+	
 	/**
-	 * Verifica la vittoria in diagonale (top left - bottom right) e
+	 * Check diagonal win (top left - bottom right) or
 	 * (top right - bottom left)
 	 * 
-	 * @param row riga della griglia
-	 * @param col colonna della griglia
-	 * @return vittoria in diagonale(TL-BR o TR-BL) 
+	 * @param row
+	 * @param col
+	 * @return true win in diagonal (TL-BR o TR-BL),
+	 * 		   false otherwise
 	 */
 	private boolean checkDiagonals(final int player, final int row, final int col)
 	{	
-		// da top-right a bottom-left
+		// from top-right to bottom-left
 		int numDisc = 1;
 		for (int i = 1; i <= 3; i++)
 		{
@@ -204,7 +209,7 @@ public class Grid implements Serializable
 		if (numDisc >= 4)
 			return true;
 		
-		// da top-left a bottom-right
+		// from top-left to bottom-right
 		numDisc = 1;
 		for (int i = 1; i <= 3; i++)
 		{
@@ -237,6 +242,11 @@ public class Grid implements Serializable
 		return false;
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public ArrayList<Integer> getAvailableColumns()
 	{
 		ArrayList<Integer> availableMoves = new ArrayList<>();
@@ -252,7 +262,13 @@ public class Grid implements Serializable
 		
 		return availableMoves;
 	}
-		
+	
+	/**
+	 * 
+	 * 
+	 * @param col
+	 * @return
+	 */
 	public int getAvailColumnPositions(final int col)
 	{
 		int positionsAvail = 0;
@@ -267,8 +283,15 @@ public class Grid implements Serializable
 		return positionsAvail;
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param col
+	 * @return
+	 */
 	public int getAvailRowIndex(final int col)
 	{
 		return getAvailColumnPositions(col) - 1;
 	}
+	
 }

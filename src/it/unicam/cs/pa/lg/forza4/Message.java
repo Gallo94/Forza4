@@ -3,9 +3,7 @@ package it.unicam.cs.pa.lg.forza4;
 import java.io.Serializable;
 
 /**
- * La classe Message istanzia un messaggio di 2byte
- * che viene scambiato tra il client/server.
- * Il tipo rappresentato dal primo ed i dati dal secondo.
+ * Rapresent a message between client and server
  * 
  * @author Luca
  */
@@ -16,17 +14,33 @@ public class Message implements Serializable
 	private int type;
 	private int data;
 	
+	/**
+	 * Create a message
+	 * 
+	 * @param type first paramter of message
+	 * @param data second paramter of message
+	 */
 	public Message(int type, int data)
 	{
 		this.type = type;
 		this.data = data;
 	}
 	
+	/**
+	 * Get the message's type
+	 * 
+	 * @return message's type
+	 */
 	public int getType()
 	{
 		return this.type;
 	}
 	
+	/**
+	 * Get the message's data
+	 * 
+	 * @return message's data
+	 */
 	public int getData()
 	{
 		return this.data;

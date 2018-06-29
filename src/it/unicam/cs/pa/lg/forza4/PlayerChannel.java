@@ -9,13 +9,10 @@ import it.unicam.cs.pa.lg.forza4.Message;
 import it.unicam.cs.pa.lg.forza4.Match.MatchStatus;
 
 /**
- * Instanziamo un canale di comunicazione tra
- * client e server. Ogni client avra' il suo PlayerChannel
- * cioe' un proprio thread.
+ * A communication's channel between server and client 
  * 
  * @author Luca
  */
-
 public class PlayerChannel
 {	
 	public final static int MAX_MESSAGE_LEN = 2; // byte
@@ -23,6 +20,13 @@ public class PlayerChannel
 	private Player player;
 	private Match match;
 	
+	/**
+	 * Create a player's channel
+	 * 
+	 * @param socket server's socket
+	 * @param player match's player
+	 * @param match game's manager
+	 */
 	public PlayerChannel(Socket socket, Player player, Match match)
 	{
 		this.socket = socket;
@@ -61,9 +65,9 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Il Client legge il messaggio inviato dal Server
+	 * Client reads message, send it from server 
 	 * 
-	 * @return message
+	 * @return message 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
@@ -86,10 +90,10 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Il messaggio per il Client viene serializzato
+	 * Write message to client
 	 * 
-	 * @param type tipo ID del Player
-	 * @param data dato Turni, Mosse, Game Over
+	 * @param type id player
+	 * @param data game's status
 	 * @throws IOException
 	 */
 	private void writeMessage(final int type, final int data) throws IOException
@@ -100,7 +104,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Viene inviata la griglia dal Server al Client 
+	 * Send grid from server to client 
 	 * 
 	 * @throws IOException
 	 */
@@ -111,7 +115,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Vengono elaborati i comandi inviati dal Client sul Server
+	 * Processing commands on server
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -146,8 +150,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Dopo l'elaborazione del comando, il Server
-	 * invia lo stato e la griglia ai Client
+	 * After processing, server send it to client
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -195,7 +198,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Viene restituito ID del Player che verra' 
+	 * Server send ID Player to client  
 	 * 
 	 * @throws IOException
 	 */
@@ -205,13 +208,15 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Il Player compie una mossa indicando la colonna
+	 * Player makes move on grid's column
 	 * 
-	 * @param col colonna della griglia
-	 * @return
+	 * @param col grid's columns
+	 * @return true if make move is done
+	 * 		   false otherwise
 	 */
 	private boolean makeMove(int col)
 	{
 		return player.placeDisc(this.match.getGrid(), col);
 	}
+	
 }
