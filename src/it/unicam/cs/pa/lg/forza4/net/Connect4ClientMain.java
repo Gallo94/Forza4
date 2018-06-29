@@ -33,12 +33,16 @@ public class Connect4ClientMain
         Options options = new Options();
 
         Option mode = new Option("mode", true, "human or ai");
-        mode.setRequired(true);
+        mode.setRequired(false);
         options.addOption(mode);
         
         Option address = new Option("server", true, "server address");
         address.setRequired(false);
         options.addOption(address);
+        
+        Option help = new Option("help", "help");
+        help.setRequired(false);
+        options.addOption(help);
         
         CommandLineParser parser = new DefaultParser();
         try
@@ -47,6 +51,20 @@ public class Connect4ClientMain
 			if (cmd.getOptions().length == 0)
 				return;
 
+			if (cmd.hasOption("help"))
+			{
+				System.out.println("Usage: Connect4Client [-server <server_ip>][-mode <mode>][-help]");
+				System.out.println();
+				System.out.println("Default server_ip is localhost (127.0.0.1)");
+				System.out.println();
+				System.out.println("Available modes:");
+				System.out.println("- human");
+				System.out.println("- ai");
+				System.out.println();
+				System.out.println("Connect4Client -help show this");
+				System.exit(0);
+			}
+			
 			if(cmd.hasOption("server"))
 				server = InetAddress.getByName(cmd.getOptionValue("server"));
 			
@@ -59,16 +77,19 @@ public class Connect4ClientMain
 					clientMode = ClientMode.AI;
 				else
 				{
-					System.err.println("Wrong argument. Choose between 'human' or 'ai'");
+					System.err.println("Usage: Connect4Client [-server <server_ip>][-mode <mode>][-help]");
 					System.exit(-1);
 				}
 			}
-				
+			else
+			{
+				clientMode = ClientMode.HUMAN;		
+			}
 		}
         catch (ParseException e)
         {
 			System.err.println("Wrong parameter");
-			System.err.println("Usage: Connect4Client [-server server_ip]");
+			System.err.println("Usage: Connect4Client [-server <server_ip>][-mode <mode>][-help]");
 			System.exit(-1);
 		}
         catch (UnknownHostException e)
