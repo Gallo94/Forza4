@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"it.unicam.cs.pa.lg.forza4"}]
+packageSearchIndex = [{"l":"unicam.cs.forza4"}]
