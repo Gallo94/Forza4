@@ -48,8 +48,9 @@ public class PlayerChannel
 				{
 					if (player.id == this.match.getWinPlayer())
 						System.out.println("Player" + player.id + " won!");
-					else
-						System.out.println("Player" + player.id + " lose!");						
+					else 
+						System.out.println("Player" + player.id + " lose!");
+					
 					break;
 				}
 				
@@ -136,6 +137,7 @@ public class PlayerChannel
 			writeGrid();
 			
 			match.checkVictory();
+			match.checkDraw();
 			
 			if (success)
 				match.switchTurn();

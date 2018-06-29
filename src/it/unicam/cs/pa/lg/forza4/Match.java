@@ -42,7 +42,7 @@ public class Match
 	/** Switch turn to player1 or player0 */
 	public void switchTurn()
 	{
-		if (!this.grid.won)
+		if (!this.grid.won && !grid.isCompleted())
 		{
 			curPlayer = (curPlayer == 0) ? 1 : 0;
 			status = curPlayer == 0 ? MatchStatus.P0_TURN : MatchStatus.P1_TURN;
@@ -62,7 +62,6 @@ public class Match
 	/** Check draw */
 	public void checkDraw()
 	{
-		// FIXME
 		if (!grid.isCompleted())
 			return;
 		
