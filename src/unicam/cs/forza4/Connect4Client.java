@@ -67,6 +67,7 @@ public class Connect4Client
 									Message returnMessage = readMessage();
 									
 									this.grid = readGrid();
+									PrintUtils.printField(System.out, grid);
 
 									if (returnMessage.getType() == MessageType.VALID_PLAY)
 									{

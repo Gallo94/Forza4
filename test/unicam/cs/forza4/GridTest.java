@@ -1,10 +1,7 @@
 package unicam.cs.forza4;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-
-import jdk.incubator.http.internal.hpack.Huffman;
 
 public class GridTest
 {
@@ -129,7 +126,6 @@ public class GridTest
 	public void checkHorizontalWinTest()
 	{
 		final Player player = new PlayerHuman(0);
-		final Player opponent = new PlayerHuman(1);
 		
 		Grid grid = new Grid();
 		

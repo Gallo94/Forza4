@@ -1,14 +1,11 @@
 package unicam.cs.forza4;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class PlayerAI extends Player
 {
 	private static final long serialVersionUID = -8413214234228884030L;
-		
-	private int[] valueColumn = {3, 4, 2, 5, 1, 6, 0};
-	
+			
 	public static final int MUST_WIN = 3; 
 	public static final int MUST_BLOCK = 2;
 	public static final int NORMAL = 1; 
@@ -69,17 +66,7 @@ public class PlayerAI extends Player
 			}			
 		}
 		
-		int index = (int) (Math.random() * bestColumns.size());
-
-		// Debug
-		System.out.println("Available columns");
-		for (int i = 0; i < availableColumns.size(); i++)
-		{
-			System.out.println(availableColumns.get(i) + " : " + grid.getAvailColumnPositions(availableColumns.get(i)));
-		}
-		
-		System.out.println("bestColumns[" + index + "] = " + bestColumns.get(index));
-					
+		int index = (int) (Math.random() * bestColumns.size());					
 		return bestColumns.get(index);
 	}
 }
