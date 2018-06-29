@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.lg.forza4.net;
+package unicam.cs.forza4;
 
 import java.io.IOException;
 import java.net.InetAddress;

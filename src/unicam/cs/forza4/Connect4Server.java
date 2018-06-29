@@ -1,13 +1,8 @@
-package it.unicam.cs.pa.lg.forza4.net;
+package unicam.cs.forza4;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-import it.unicam.cs.pa.lg.forza4.Match;
-import it.unicam.cs.pa.lg.forza4.Player;
-import it.unicam.cs.pa.lg.forza4.PlayerHuman;
-import it.unicam.cs.pa.lg.forza4.PlayerChannel;
 
 public class Connect4Server
 {

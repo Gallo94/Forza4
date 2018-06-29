@@ -1,12 +1,12 @@
-package it.unicam.cs.pa.lg.forza4;
+package unicam.cs.forza4;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import it.unicam.cs.pa.lg.forza4.Message;
-import it.unicam.cs.pa.lg.forza4.Match.MatchStatus;
+import unicam.cs.forza4.Message;
+import unicam.cs.forza4.Match.MatchStatus;
 
 /**
  * A communication's channel between server and client 

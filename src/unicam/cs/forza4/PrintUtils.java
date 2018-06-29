@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.lg.forza4;
+package unicam.cs.forza4;
 
 import java.io.PrintStream;
 

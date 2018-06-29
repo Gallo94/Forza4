@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.lg.forza4.net;
+package unicam.cs.forza4;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -6,14 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import it.unicam.cs.pa.lg.forza4.PlayerHuman;
-import it.unicam.cs.pa.lg.forza4.Grid;
-import it.unicam.cs.pa.lg.forza4.Message;
-import it.unicam.cs.pa.lg.forza4.MessageType;
-import it.unicam.cs.pa.lg.forza4.Player;
-import it.unicam.cs.pa.lg.forza4.PlayerAI;
-import it.unicam.cs.pa.lg.forza4.PrintUtils;
-import it.unicam.cs.pa.lg.forza4.net.Connect4ClientMain.ClientMode;
+import unicam.cs.forza4.Connect4ClientMain.ClientMode;
 
 public class Connect4Client
 {
