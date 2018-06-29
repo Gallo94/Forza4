@@ -150,7 +150,6 @@ public class Grid implements Serializable
 		}
 		
 		// Check last position to right
-		numDisc = 1;
 		for (int i = 1; i <= 3; i++)
 		{
 			if (!isIndexInBound(row, col + i))
