@@ -1,10 +1,10 @@
 package unicam.cs.forza4;
 
-public class Connect4ServerMain
+public class Forza4ServerMain
 {
 	public static void main(String[] argc)
 	{
-		Connect4Server server = new Connect4Server();
+		Forza4Server server = new Forza4Server();
 		server.start();
 	}
 }

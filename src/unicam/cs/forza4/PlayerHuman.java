@@ -42,7 +42,7 @@ public class PlayerHuman extends Player
 		}
 		while (value < 0 || value > 6);
 		
-		// FIXME: close scanner
+//		FIXME: close scanner
 //		scanner.close();
 		
 		return value;

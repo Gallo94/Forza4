@@ -6,9 +6,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import unicam.cs.forza4.Connect4ClientMain.ClientMode;
+import unicam.cs.forza4.Forza4ClientMain.ClientMode;
 
-public class Connect4Client
+public class Forza4Client
 {
 	public static final int PORT = 9001;
 	private Socket socket = null;
@@ -19,7 +19,7 @@ public class Connect4Client
 	// Message attributes
 	public final static int MAX_MESSAGE_LEN = 2; // Byte
 	
-	public Connect4Client(final String server, final int port, final ClientMode mode)
+	public Forza4Client(final String server, final int port, final ClientMode mode)
 	{
 		this.mode = mode;
 		this.grid = new Grid(); 

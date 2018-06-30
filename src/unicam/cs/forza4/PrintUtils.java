@@ -41,7 +41,7 @@ public class PrintUtils
 	 * Print border rows and upper/lower edges +---+ 
 	 * 
 	 * @param writer
-	 * @param size
+	 * @param size 
 	 */
 	private static void printRowDelimiter(PrintStream writer, int size)
 	{

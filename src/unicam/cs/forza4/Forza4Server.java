@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Connect4Server
+public class Forza4Server
 {
 	public final static int PORT = 9001;
 	public final static int MAX_NUM_PLAYER = 2;
@@ -14,7 +14,7 @@ public class Connect4Server
 	private int numPlayers = 0;
 	private Match match;
 	
-	public Connect4Server()
+	public Forza4Server()
 	{
 		players = new PlayerHuman[MAX_NUM_PLAYER];
 		clients = new Socket[MAX_NUM_PLAYER];

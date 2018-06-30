@@ -10,7 +10,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
 
-public class Connect4ClientMain 
+public class Forza4ClientMain 
 {
 	
 	private static InetAddress server;
@@ -24,7 +24,7 @@ public class Connect4ClientMain
 		
 		parseCommandLine(args);
 		
-		Connect4Client client = new Connect4Client(server.getHostAddress(), 9001, clientMode);
+		Forza4Client client = new Forza4Client(server.getHostAddress(), 9001, clientMode);
 		client.start();
 	}
 	
