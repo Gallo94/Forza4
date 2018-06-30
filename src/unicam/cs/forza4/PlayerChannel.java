@@ -34,6 +34,7 @@ public class PlayerChannel
 		this.match = match;
 	}
 	
+	/** Start, manage and close the channel for client */
 	public void start()
 	{
 		try
@@ -66,7 +67,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Client reads message, send it from server 
+	 * Client reads the message sent by the server
 	 * 
 	 * @return message 
 	 * @throws IOException
@@ -91,7 +92,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Write message to client
+	 * Server writes message to client
 	 * 
 	 * @param type id player
 	 * @param data game's status
@@ -105,7 +106,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Send grid from server to client 
+	 * Server sends the grid to the client 
 	 * 
 	 * @throws IOException
 	 */
@@ -116,7 +117,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Processing commands on server
+	 * Commands are processed on the server
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -152,7 +153,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * After processing, server send it to client
+	 * After processing, server send message and grid to client
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException

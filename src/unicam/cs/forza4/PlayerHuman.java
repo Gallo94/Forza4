@@ -21,6 +21,7 @@ public class PlayerHuman extends Player
 		super(id);
 	}
 	
+	/** Handle input for the player */
 	@Override
 	public int input(final Grid grid)
 	{

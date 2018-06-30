@@ -47,7 +47,7 @@ public class Forza4Client
 	}
 	
 	/**
-	 * Start the match and manage the messages sent by the server
+	 * Start the client and manage the messages sent by the server
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
