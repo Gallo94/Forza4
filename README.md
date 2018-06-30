@@ -15,5 +15,5 @@
 
 ## MANUALE D'USO:
 
-Per eseguire il progetto in Eclipse dovrete installare [ANSI Escape in Console] (https://marketplace.eclipse.org/content/ansi-escape-console).
-Invece da terminale dovrete assicurarvi che i caratteri escape ANSI siano attivi.
+Per eseguire il progetto in Eclipse dovrete installare un plugin "ANSI Escape in Console" (https://marketplace.eclipse.org/content/ansi-escape-console).
+Da terminale, invece, dovrete assicurarvi che i caratteri escape ANSI siano abilitati.
