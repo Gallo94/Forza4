@@ -2,20 +2,33 @@ package unicam.cs.forza4;
 
 import java.util.ArrayList;
 
+/**
+ * Rapresent the AI Player (PC)
+ * 
+ * @author gall9
+ */
 public class PlayerAI extends Player
 {
 	private static final long serialVersionUID = -8413214234228884030L;
-			
-	public static final int MUST_WIN = 3; 
+	/** If there are 3 discs in row of opponent */
+	public static final int MUST_WIN = 3;
+	/** If there are 2 discs in row of opponent */
 	public static final int MUST_BLOCK = 2;
-	public static final int NORMAL = 1; 
+	/** If there is 1 disc of opponent */
+	public static final int NORMAL = 1;
 	
+	/**
+	 * Create the AI player
+	 * 
+	 * @param id ID player
+	 */
 	public PlayerAI(int id)
 	{
 		super(id);
 		
 	}
-
+	
+	/** Handle input for the AI player */
 	@Override
 	public int input(final Grid grid)
 	{

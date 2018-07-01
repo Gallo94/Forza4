@@ -3,7 +3,7 @@ package unicam.cs.forza4;
 import java.util.Scanner;
 
 /**
- * Rapresent a Human player
+ * Rapresent the Human player
  * 
  * @author Luca
  */
@@ -21,7 +21,7 @@ public class PlayerHuman extends Player
 		super(id);
 	}
 	
-	/** Handle input for the player */
+	/** Handle input for the human player */
 	@Override
 	public int input(final Grid grid)
 	{

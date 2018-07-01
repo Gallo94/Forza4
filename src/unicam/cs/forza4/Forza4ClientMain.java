@@ -39,6 +39,7 @@ public class Forza4ClientMain
 		Forza4Client client = new Forza4Client(server.getHostAddress(), 9001, clientMode);
 		client.start();
 	}
+	
 	/**
 	 * Handle the parameters on command line to start local or LAN match and
 	 * to challenge AI or human player

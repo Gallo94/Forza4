@@ -222,7 +222,6 @@ public class Forza4Client
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	// Lettura del messaggio dal client
 	private Message readMessage() throws IOException, ClassNotFoundException
 	{
 		Message message = null;
@@ -248,7 +247,6 @@ public class Forza4Client
 	 * @param data message's data
 	 * @throws IOException
 	 */
-	// Scrive messaggio del Server per il Client
 	private void writeMessage(final int type, final int data) throws IOException
 	{
 		Message message = new Message(type, data);

@@ -3,6 +3,11 @@ package unicam.cs.forza4;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Rappresent the game's grid
+ * 
+ * @author gall9
+ */
 public class Grid implements Serializable
 {
 	private static final long serialVersionUID = -6825761503971516066L;
@@ -16,6 +21,7 @@ public class Grid implements Serializable
 	private int numDisc;
 	public boolean won;
 	
+	/** Create the grid of rows and columns */
 	public Grid()
 	{	
 		this.cells = new char[ROWS][COLUMNS];
@@ -26,6 +32,11 @@ public class Grid implements Serializable
 		this.numDisc = 0;
 	}
 	
+	/**
+	 * Get the grid's cells
+	 * 
+	 * @return grid's cells
+	 */
 	public char[][] getCells()
 	{
 		return this.cells;
@@ -61,7 +72,7 @@ public class Grid implements Serializable
 	}
 	
 	/**
-	 * Check grid is full
+	 * Check grid if is full
 	 * 
 	 * @return true if grid is full,
 	 * 		   false otherwise
@@ -85,11 +96,11 @@ public class Grid implements Serializable
 	}
 	
 	/**
-	 * Check win in vertical, horizontal and diagonal 
+	 * Check if win in vertical, horizontal and diagonal 
 	 * 
-	 * @param row
-	 * @param col
-	 * @return type of win
+	 * @param row grid's rows
+	 * @param col grid's columns
+	 * @return type of win vertical or horizonatal or diagonal
 	 */
 	public boolean checkWin(final int player, final int row, final int col)
 	{	
@@ -97,7 +108,7 @@ public class Grid implements Serializable
 	}
 	
 	/**
-	 * Check win in vertical
+	 * Check if win in vertical
 	 * 
 	 * @param row
 	 * @param col
@@ -125,7 +136,7 @@ public class Grid implements Serializable
 	}
 	
 	/**
-	 * Check win in horizontal
+	 * Check if win in horizontal
 	 * 
 	 * @param row
 	 * @param col
@@ -168,7 +179,7 @@ public class Grid implements Serializable
 	}
 	
 	/**
-	 * Check diagonal win (top left - bottom right) or
+	 * Check if win in diagonal (top left - bottom right) or
 	 * (top right - bottom left)
 	 * 
 	 * @param row
@@ -242,9 +253,10 @@ public class Grid implements Serializable
 	}
 	
 	/**
+	 * Get available columns in grid. Create a ArrayList to save the
+	 * available moves
 	 * 
-	 * 
-	 * @return
+	 * @return ArrayList available moves
 	 */
 	public ArrayList<Integer> getAvailableColumns()
 	{
@@ -263,10 +275,10 @@ public class Grid implements Serializable
 	}
 	
 	/**
+	 * Get available columns position in grid
 	 * 
-	 * 
-	 * @param col
-	 * @return
+	 * @param col grid's columns
+	 * @return position available
 	 */
 	public int getAvailColumnPositions(final int col)
 	{
@@ -283,10 +295,10 @@ public class Grid implements Serializable
 	}
 	
 	/**
+	 * Get available rows in grid
 	 * 
-	 * 
-	 * @param col
-	 * @return
+	 * @param col grid's columns
+	 * @return 
 	 */
 	public int getAvailRowIndex(final int col)
 	{
