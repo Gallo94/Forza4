@@ -11,7 +11,7 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
 
 /**
- * Declare the Forza4Client
+ * Rappresent the Forza4Client
  * 
  * @author gall9
  */

@@ -3,7 +3,7 @@
 ## Classi
 
 * **Forza4Server**: Inizializza la partita ed un thread di sessione per giocatore
-* **Forza4Client**: Ha i riferimenti a Player, Grid ed alla socket del Server. Legge/scrive i messaggi da/per il server
+* **Forza4Client**: Inizializza il client e la connessione alla porta del socket del server. Legge/scrive i messaggi da/per il server
 * **Match**: Game Manager
 * **Message**: Definisce i messaggi tra client e server
 * **PlayerChannel**: Crea canali di comunicazione tra client e server

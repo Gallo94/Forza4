@@ -1,7 +1,7 @@
 package unicam.cs.forza4;
 
 /**
- * Declare the Forza4Server
+ * Rappresent the Forza4Server
  * 
  * @author gall9
  */
