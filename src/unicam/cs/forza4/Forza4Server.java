@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Rappresent a Forza4Server
+ * Rapresent a Forza4Server
  * 
  * @author gall9
  */
@@ -67,7 +67,7 @@ public class Forza4Server
 		}
 	}
 	
-	/** Rappresent the thread game's session for players  */
+	/** Rapresent the thread game's session for players  */
 	private class SessionThread implements Runnable
 	{
 		private Socket client;

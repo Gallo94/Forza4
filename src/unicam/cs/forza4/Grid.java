@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Rappresent the game's grid
+ * Rapresent the game's grid
  * 
  * @author gall9
  */

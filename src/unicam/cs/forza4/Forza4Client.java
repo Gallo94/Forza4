@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 import unicam.cs.forza4.Forza4ClientMain.ClientMode;
 
 /**
- * Rappresent the Client
+ * Rapresent the Client
  * 
  * @author gall9
  */

@@ -3,7 +3,7 @@ package unicam.cs.forza4;
 import java.io.Serializable;
 
 /**
- * Rappresent the Player in game
+ * Rapresent the Player in game
  * 
  * @author Luca
  */
