@@ -22,7 +22,7 @@ public class PrintUtils
 	 * @param writer
 	 * @param grid match's grid
 	 */
-	public static void printField(PrintStream writer, final Grid grid)
+	public static void printGrid(PrintStream writer, final Grid grid)
 	{
 		int width = Grid.COLUMNS;
 		int height = Grid.ROWS;

@@ -76,14 +76,14 @@ public class Forza4Client
 							try
 							{
 								boolean isValid = false;
-								PrintUtils.printField(System.out, grid);
+								PrintUtils.printGrid(System.out, grid);
 								int input = player.input(this.grid);
 								
 								writeMessage(MessageType.PLAYER_MOVE, input);								
 								Message returnMessage = readMessage();
 								
 								this.grid = readGrid();
-								PrintUtils.printField(System.out, grid);
+								PrintUtils.printGrid(System.out, grid);
 
 								if (returnMessage.getType() == MessageType.VALID_PLAY)
 								{
@@ -127,7 +127,7 @@ public class Forza4Client
 							System.out.println("You Lose!");
 						
 						this.grid = readGrid();
-						PrintUtils.printField(System.out, grid);
+						PrintUtils.printGrid(System.out, grid);
 
 						gameOver = true;
 						
