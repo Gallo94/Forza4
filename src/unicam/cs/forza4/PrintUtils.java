@@ -68,12 +68,12 @@ public class PrintUtils
 		String disc = " ";
 		for (int i = 0; i < width; i++)
 		{
-			if (grid.getCells()[row][i] == Player.CIRCLE)
-				disc = ANSI_GREEN + Player.CIRCLE + ANSI_RESET;
-			else if (grid.getCells()[row][i] == Player.CROSS) 
-				disc = ANSI_RED + Player.CROSS + ANSI_RESET;
+			if (grid.getCells()[row][i] == Grid.CIRCLE)
+				disc = ANSI_GREEN + Grid.CIRCLE + ANSI_RESET;
+			else if (grid.getCells()[row][i] == Grid.CROSS) 
+				disc = ANSI_RED + Grid.CROSS + ANSI_RESET;
 			else
-				disc = Player.EMPTY + "";
+				disc = Grid.EMPTY + "";
 				
 			writer.print("|");
 			writer.print(" " + disc + " ");

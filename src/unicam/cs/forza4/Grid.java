@@ -17,9 +17,15 @@ public class Grid implements Serializable
 	public static final int COLUMNS = 7;
 	
 	private char[][] cells;
+	/** O's discs for player0 */
+	public static final char CIRCLE = 'O';
+	/** X's discs for player1 */
+	public static final char CROSS = 'X';
+	public static final char EMPTY = ' ';
 	
 	private int numDisc;
 	public boolean won;
+	
 	
 	/** Create the grid of rows and columns */
 	public Grid()
@@ -27,7 +33,7 @@ public class Grid implements Serializable
 		this.cells = new char[ROWS][COLUMNS];
 		for (int row = 0; row < ROWS; row++)
 			for (int col = 0; col < COLUMNS; col++)
-				this.cells[row][col] = Player.EMPTY;
+				this.cells[row][col] = EMPTY;
 		
 		this.numDisc = 0;
 	}
@@ -55,9 +61,9 @@ public class Grid implements Serializable
 		int id = player.getId();
 		for (int row = ROWS - 1; row >= 0; row--)
 		{
-			if (this.cells[row][col] == Player.EMPTY && isIndexInBound(row, col))
+			if (this.cells[row][col] == EMPTY && isIndexInBound(row, col))
 			{
-				this.cells[row][col] = Player.getDisc(id);
+				this.cells[row][col] = (player.getId() == 0) ? CIRCLE : CROSS;
 				this.numDisc++;
 				
 				won = checkWin(id, row, col);
@@ -69,6 +75,11 @@ public class Grid implements Serializable
 		}
 		
 		return false;
+	}
+	
+	private char getPlayerDisc(final int player)
+	{
+		return (player == 0) ? CIRCLE : CROSS;
 	}
 	
 	/**
@@ -124,7 +135,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row + i, col))
 				break;
 			
-			if (Player.getDisc(player) != this.cells[row + i][col])
+			if (getPlayerDisc(player) != this.cells[row + i][col])
 				break;
 
 			numDisc++;
@@ -152,7 +163,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row, col - i))
 				break;
 			
-			if (Player.getDisc(player) != this.cells[row][col - i])
+			if (getPlayerDisc(player) != this.cells[row][col - i])
 				break;
 
 			numDisc++;
@@ -166,7 +177,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row, col + i))
 				break;
 			
-			if (Player.getDisc(player) != this.cells[row][col + i]) // FIXME
+			if (getPlayerDisc(player) != this.cells[row][col + i]) // FIXME
 				break;
 			
 			numDisc++;
@@ -196,7 +207,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row - i, col + i))
 				break;
 			
-			if (Player.getDisc(player) != this.cells[row - i][col + i])
+			if (getPlayerDisc(player) != this.cells[row - i][col + i])
 				break;
 			
 			numDisc++;
@@ -210,7 +221,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row + i, col - i))
 				break;
 			
-			if (Player.getDisc(player) != this.cells[row + i][col - i])
+			if (getPlayerDisc(player) != this.cells[row + i][col - i])
 				break;
 			
 			numDisc++;
@@ -226,7 +237,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row + i, col + i))
 				break;
 			
-			if (Player.getDisc(player) != this.cells[row + i][col + i])
+			if (getPlayerDisc(player) != this.cells[row + i][col + i])
 				break;
 			
 			numDisc++;
@@ -240,7 +251,7 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row - i, col - i))
 				break;
 			
-			if (Player.getDisc(player) != this.cells[row - i][col - i])
+			if (getPlayerDisc(player) != this.cells[row - i][col - i])
 				break;
 			
 			numDisc++;
@@ -285,7 +296,7 @@ public class Grid implements Serializable
 		int positionsAvail = 0;
 		for (int row = 0; row < ROWS; row++)
 		{
-			if (cells[row][col] == Player.EMPTY)
+			if (cells[row][col] == EMPTY)
 			{
 				positionsAvail++;
 			}
