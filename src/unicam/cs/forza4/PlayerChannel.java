@@ -21,7 +21,7 @@ public class PlayerChannel
 	private Match match;
 	
 	/**
-	 * Create a player's channel
+	 * Constructor
 	 * 
 	 * @param socket server's socket
 	 * @param player match's player
@@ -34,7 +34,7 @@ public class PlayerChannel
 		this.match = match;
 	}
 	
-	/** Start, manage and close the channel for client */
+	/** Start communication channel between server and client */
 	public void start()
 	{
 		try
@@ -70,8 +70,6 @@ public class PlayerChannel
 	 * Client reads the message sent by the server
 	 * 
 	 * @return message 
-	 * @throws IOException
-	 * @throws ClassNotFoundException
 	 */
 	private Message readMessage() throws IOException, ClassNotFoundException
 	{
@@ -96,7 +94,6 @@ public class PlayerChannel
 	 * 
 	 * @param type id player
 	 * @param data game's status
-	 * @throws IOException
 	 */
 	private void writeMessage(final int type, final int data) throws IOException
 	{
@@ -108,7 +105,6 @@ public class PlayerChannel
 	/**
 	 * Server sends the grid to the client 
 	 * 
-	 * @throws IOException
 	 */
 	private void writeGrid() throws IOException
 	{
@@ -117,10 +113,8 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Commands are processed on the server
+	 * Process player input and respond plays validity
 	 * 
-	 * @throws IOException
-	 * @throws ClassNotFoundException
 	 */
 	private void processPlayerInput() throws IOException, ClassNotFoundException
 	{
@@ -153,10 +147,8 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * After processing, server send message and grid to client
+	 * Send response to client
 	 * 
-	 * @throws IOException
-	 * @throws ClassNotFoundException
 	 */
 	private void writeResponse() throws IOException, ClassNotFoundException
 	{
@@ -201,7 +193,7 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Server send ID Player to client  
+	 * Send player's id to client  
 	 * 
 	 * @throws IOException
 	 */
@@ -211,15 +203,13 @@ public class PlayerChannel
 	}
 	
 	/**
-	 * Player makes move on grid's column
+	 * Player move
 	 * 
-	 * @param col grid's columns
-	 * @return true if make move is done
-	 * 		   false otherwise
+	 * @param col grid's column
+	 * @return true if play is done, false otherwise
 	 */
 	private boolean makeMove(int col)
 	{
 		return player.placeDisc(this.match.getGrid(), col);
 	}
-	
 }

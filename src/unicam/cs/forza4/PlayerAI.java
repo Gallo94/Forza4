@@ -3,21 +3,21 @@ package unicam.cs.forza4;
 import java.util.ArrayList;
 
 /**
- * Rapresent the AI Player (PC)
+ * Player AI
  * 
  * @author gall9
  */
 public class PlayerAI extends Player
 {
-	/** If there are 3 discs in row of opponent */
+	/** column weight*/
 	public static final int MUST_WIN = 3;
-	/** If there are 2 discs in row of opponent */
+	/** column weight*/
 	public static final int MUST_BLOCK = 2;
-	/** If there is 1 disc of opponent */
+	/** column weight*/
 	public static final int NORMAL = 1;
 	
 	/**
-	 * Create the AI player
+	 * Constructor
 	 * 
 	 * @param id ID player
 	 */

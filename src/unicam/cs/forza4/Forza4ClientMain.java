@@ -11,7 +11,7 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
 
 /**
- * Rapresent the Forza4Client
+ * Client application bootstrap
  * 
  * @author gall9
  */
@@ -22,14 +22,6 @@ public class Forza4ClientMain
 	public enum ClientMode { HUMAN,	AI }
 	private static ClientMode clientMode;
 	
-	/**
-	 * Main method to start client
-	 * 
-	 * @param args
-	 * @throws UnknownHostException
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
 	public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException
 	{
 		server = InetAddress.getByName("localhost");
@@ -41,8 +33,7 @@ public class Forza4ClientMain
 	}
 	
 	/**
-	 * Handle the parameters on command line to start local or LAN match and
-	 * to challenge AI or human player
+	 * Handle the parameters on command line such as start local or networked match, or play as AI.
 	 * 
 	 * @param args command line
 	 */

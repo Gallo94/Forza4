@@ -3,16 +3,16 @@ package unicam.cs.forza4;
 import java.util.Scanner;
 
 /**
- * Rapresent the Human player
+ * Human player
  * 
  * @author Luca
  */
 public class PlayerHuman extends Player
 {	
 	/**
-	 * Create a human player
+	 * Constructor
 	 * 
-	 * @param id ID player
+	 * @param id player's id
 	 */
 	public PlayerHuman(int id)
 	{

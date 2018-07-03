@@ -1,7 +1,7 @@
 package unicam.cs.forza4;
 
 /**
- * Rapresents the messages from server to client and the other way
+ * Represents the messages from server to client and the other way
  * 
  * @author Luca
  */

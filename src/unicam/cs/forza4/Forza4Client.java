@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 import unicam.cs.forza4.Forza4ClientMain.ClientMode;
 
 /**
- * Rapresent the Client
+ * Forza4Client represent the game client. It manages connection to server and communication mechanics   
  * 
  * @author gall9
  */
@@ -22,10 +22,10 @@ public class Forza4Client
 	private ClientMode mode;
 
 	// Message attributes
-	public final static int MAX_MESSAGE_LEN = 2; // Byte
+	public final static int MAX_MESSAGE_LEN = 2;
 	
 	/**
-	 * Create a Client that it connected to the server on socket's port
+	 * Constructor
 	 * 
 	 * @param server Forza4Server
 	 * @param port socket's port
@@ -47,10 +47,7 @@ public class Forza4Client
 	}
 	
 	/**
-	 * Start the client and manage the messages sent by the server
-	 * 
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * Start the client. This is the communication loop
 	 */
 	public void start() throws IOException, ClassNotFoundException
 	{
@@ -145,13 +142,10 @@ public class Forza4Client
 	}
 	
 	/**
-	 * Client connects to the socket's port of the server
+	 * Connect to server
 	 * 
 	 * @param server Forza4Server
 	 * @param PORT socket's port
-	 * @throws UnknownHostException
-	 * @throws IOException
-	 * @throws ClassNotFoundException
 	 */
 	public void connectToServer(final String server, final int PORT) throws UnknownHostException, IOException, ClassNotFoundException
 	{
@@ -163,11 +157,9 @@ public class Forza4Client
 	}
 	
 	/**
-	 * Server read the ID's Player
+	 * Read the Player's ID sent by the server
 	 * 
 	 * @return message's data
-	 * @throws ClassNotFoundException
-	 * @throws IOException
 	 */
 	public int readPlayerId() throws ClassNotFoundException, IOException
 	{
@@ -178,11 +170,9 @@ public class Forza4Client
 	}
 	
 	/**
-	 * Server reads client's grid sent by the client
+	 * Read grid sent by the server
 	 * 
 	 * @return grid
-	 * @throws IOException
-	 * @throws ClassNotFoundException
 	 */
 	public Grid readGrid() throws IOException, ClassNotFoundException
 	{
@@ -191,36 +181,19 @@ public class Forza4Client
 	}
 	
 	/**
-	 * Server reads the response sent by the client
+	 * Read the response sent by the server
 	 * 
 	 * @return message
-	 * @throws IOException
-	 * @throws ClassNotFoundException
 	 */
 	public Message readResponse() throws IOException, ClassNotFoundException
 	{
-		ObjectInputStream in;
-		Message message = null;
-		try
-		{
-			in = new ObjectInputStream(socket.getInputStream());
-			message = (Message) in.readObject();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-			System.exit(-1);
-		}
-		
-		return message;
+		return readMessage();
 	}
 	
 	/**
-	 * Client read the message sent by the server
+	 * Read the message sent by the server
 	 * 
-	 * @return message
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * @return message message received
 	 */
 	private Message readMessage() throws IOException, ClassNotFoundException
 	{
@@ -241,11 +214,10 @@ public class Forza4Client
 	}
 	
 	/**
-	 * Server send message to the client
+	 * Write message to the server
 	 * 
 	 * @param type message's type
 	 * @param data message's data
-	 * @throws IOException
 	 */
 	private void writeMessage(final int type, final int data) throws IOException
 	{
@@ -253,5 +225,4 @@ public class Forza4Client
 		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 		out.writeObject(message);
 	}
-	
 }

@@ -3,7 +3,7 @@ package unicam.cs.forza4;
 import java.io.Serializable;
 
 /**
- * Rapresent a message between client and server
+ * Message is the basic unit for communicating between client and server
  * 
  * @author Luca
  */
@@ -15,10 +15,10 @@ public class Message implements Serializable
 	private int data;
 	
 	/**
-	 * Create a message
+	 * Constructor
 	 * 
-	 * @param type first paramter of message
-	 * @param data second paramter of message
+	 * @param type 
+	 * @param data
 	 */
 	public Message(int type, int data)
 	{

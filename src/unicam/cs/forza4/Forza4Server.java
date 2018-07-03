@@ -5,8 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Rapresent a Forza4Server
- * 
+ * Forza4Server represent the game server. It accepts connection from clients,
+ * communication mechanics and states synchronization.
  * @author gall9
  */
 public class Forza4Server
@@ -19,14 +19,14 @@ public class Forza4Server
 	private int numPlayers = 0;
 	private Match match;
 	
-	/** Accept 2 Players and 2 Player's sockets */
+	/** Constructor */
 	public Forza4Server()
 	{
 		players = new PlayerHuman[MAX_NUM_PLAYER];
 		clients = new Socket[MAX_NUM_PLAYER];
 	}
 	
-	/** Start the server and wait 2 player to run the match */
+	/** Start the server and wait 2 player for running the match */
 	public void start()
 	{
 		try
@@ -67,7 +67,7 @@ public class Forza4Server
 		}
 	}
 	
-	/** Rapresent the thread game's session for players  */
+	/** Represent the thread game's session for a single player */
 	private class SessionThread implements Runnable
 	{
 		private Socket client;
@@ -75,7 +75,7 @@ public class Forza4Server
 		private Match match;
 		
 		/**
-		 * Create a thread per players in a match
+		 * Constructor
 		 * 
 		 * @param client client
 		 * @param player player0, player1
@@ -88,7 +88,7 @@ public class Forza4Server
 			this.match = match;
 		}
 		
-		/** After 2 players have connected, run the match */
+		@Override
 		public void run()
 		{
 			System.out.println("Connected with " +  this.player.getName());

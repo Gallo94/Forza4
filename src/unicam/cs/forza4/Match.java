@@ -3,12 +3,13 @@ package unicam.cs.forza4;
 import java.util.Random;
 
 /**
- * Rapresent a game's manager
+ * Match manages game states
  * 
  * @author Luca
  */
 public class Match
 {
+	/** MatchStatus represent each possible game state */
 	enum MatchStatus
 	{
 		IDLE,
@@ -19,14 +20,12 @@ public class Match
 		DRAW
 	}
 
-	private int curPlayer;
-	
 	private Grid grid;
 	MatchStatus status = MatchStatus.IDLE;
-	
+	private int curPlayer;
 	private int winPlayer;
 	
-	/** Create a match */
+	/** Constructor */
 	public Match()
 	{
 		grid = new Grid();
@@ -39,7 +38,7 @@ public class Match
 		winPlayer = -1;
 	}
 	
-	/** Switch turn to player1 or player0 */
+	/** Switch players turn */
 	public void switchTurn()
 	{
 		if (!this.grid.won && !grid.isCompleted())
@@ -49,7 +48,7 @@ public class Match
 		}
 	}
 	
-	/** Check win player1 or player0 */
+	/** Check if current player has won */
 	public void checkVictory()
 	{	
 		if (this.grid.won)
@@ -69,7 +68,7 @@ public class Match
 	}
 	
 	/**
-	 *  Get the match's status
+	 * Get the match's status
 	 * 
 	 * @return status
 	 */

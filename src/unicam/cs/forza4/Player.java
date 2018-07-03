@@ -1,56 +1,64 @@
 package unicam.cs.forza4;
 
 /**
- * Rapresent the Player in game
+ * Player
  * 
  * @author Luca
  */
 public abstract class Player 
 {
-	protected String name;
+	protected String name;		// FIXME
 	protected int id;
 
 	/**
-	 * Create the player's ID
+	 * Constructor
 	 * 
-	 * @param id
-	 *            ID's player
+	 * @param id player's id
 	 */
-	public Player(final int id) {
+	public Player(final int id)
+	{
 		this.name = String.valueOf(id);
 		this.id = id;
 	}
 
 	/**
-	 * Get ID's player
+	 * Get player's id
 	 * 
-	 * @return id ID's player
+	 * @return player's id
 	 */
-	public int getId() {
+	public int getId()
+	{
 		return this.id;
 	}
 
 	/**
-	 * Get name's player
+	 * Get player's name
 	 * 
-	 * @return name name's player
+	 * @return player's name
 	 */
-	public String getName() {
+	public String getName()
+	{
 		return this.name;
 	}
 
 	/**
 	 * Place the disc in the grid's column
 	 * 
-	 * @param grid
-	 *            game's grid
-	 * @param col
-	 *            grid's columns
-	 * @return true if place disc is done false otherwise
+	 * @param grid game's grid
+	 * @param col grid's column
+	 * @return true if place disc is done, false otherwise
 	 */
-	public boolean placeDisc(Grid grid, final int col) {
+	public boolean placeDisc(Grid grid, final int col)
+	{
 		return grid.addDisc(this, col);
 	}
 
+	/**
+	 * Returns a input from player.
+	 * Must be overridden by inherited class
+	 * 
+	 * @param grid
+	 * @return player's input
+	 */
 	public abstract int input(final Grid grid);
 }
