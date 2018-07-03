@@ -35,7 +35,7 @@ public class PlayerAI extends Player
 		ArrayList<Integer> availableColumns = grid.getAvailableColumns();
 		
 		// Evaluate weights
-		int opponentId = 0;
+		int opponentId = (this.id % 2 == 0) ? 1 : 0;
 		int[] columnValues = new int[availableColumns.size()];
 		for (int i = 0; i < columnValues.length; i++)
 		{
