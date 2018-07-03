@@ -17,7 +17,6 @@ import org.apache.commons.cli.ParseException;
  */
 public class Forza4ClientMain 
 {
-	
 	private static InetAddress server;
 	public enum ClientMode { HUMAN,	AI }
 	private static ClientMode clientMode;

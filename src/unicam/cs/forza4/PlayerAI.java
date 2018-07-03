@@ -9,11 +9,11 @@ import java.util.ArrayList;
  */
 public class PlayerAI extends Player
 {
-	/** column weight*/
+	/** column weight */
 	public static final int MUST_WIN = 3;
-	/** column weight*/
+	/** column weight */
 	public static final int MUST_BLOCK = 2;
-	/** column weight*/
+	/** column weight */
 	public static final int NORMAL = 1;
 	
 	/**
@@ -31,7 +31,7 @@ public class PlayerAI extends Player
 	@Override
 	public int input(final Grid grid)
 	{
-		// Get available positions
+		// Get available columns
 		ArrayList<Integer> availableColumns = grid.getAvailableColumns();
 		
 		// Evaluate weights

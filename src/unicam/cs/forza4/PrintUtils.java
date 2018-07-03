@@ -19,7 +19,7 @@ public class PrintUtils
 	/**
 	 * Print grid
 	 * 
-	 * @param writer
+	 * @param writer print
 	 * @param grid match's grid
 	 */
 	public static void printGrid(PrintStream writer, final Grid grid)
@@ -40,8 +40,8 @@ public class PrintUtils
 	/**
 	 * Print border rows and upper/lower edges +---+ 
 	 * 
-	 * @param writer
-	 * @param size 
+	 * @param writer print
+	 * @param size size of row
 	 */
 	private static void printRowDelimiter(PrintStream writer, int size)
 	{
@@ -55,7 +55,7 @@ public class PrintUtils
 	/**
 	 * Print rows and side edges |  |
 	 * 
-	 * @param writer
+	 * @param writer print
 	 * @param row grid's rows
 	 * @param grid match's grid
 	 */
@@ -84,7 +84,7 @@ public class PrintUtils
 	/**
 	 * Print header for columns
 	 * 
-	 * @param writer
+	 * @param writer print
 	 * @param width grid's width
 	 */
 	private static void printColumnsHeader(PrintStream writer, int width) {

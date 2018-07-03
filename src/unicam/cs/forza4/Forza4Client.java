@@ -15,6 +15,7 @@ import unicam.cs.forza4.Forza4ClientMain.ClientMode;
  */
 public class Forza4Client
 {
+	/** Door's number of client socket */
 	public static final int PORT = 9001;
 	private Socket socket = null;
 	private Player player;

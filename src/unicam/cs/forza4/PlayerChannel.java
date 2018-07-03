@@ -15,7 +15,7 @@ import unicam.cs.forza4.Match.MatchStatus;
  */
 public class PlayerChannel
 {	
-	public final static int MAX_MESSAGE_LEN = 2; // byte
+	public final static int MAX_MESSAGE_LEN = 2;
 	private Socket socket;
 	private Player player;
 	private Match match;
@@ -102,20 +102,14 @@ public class PlayerChannel
 		out.writeObject(message);
 	}
 	
-	/**
-	 * Server sends the grid to the client 
-	 * 
-	 */
+	/** Server sends the grid to the client */
 	private void writeGrid() throws IOException
 	{
 		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 		out.writeObject(this.match.getGrid());
 	}
 	
-	/**
-	 * Process player input and respond plays validity
-	 * 
-	 */
+	/** Process player input and respond plays validity */
 	private void processPlayerInput() throws IOException, ClassNotFoundException
 	{
 		Message message = readMessage();
@@ -146,10 +140,7 @@ public class PlayerChannel
 		}
 	}
 	
-	/**
-	 * Send response to client
-	 * 
-	 */
+	/** Send response to client */
 	private void writeResponse() throws IOException, ClassNotFoundException
 	{
 		MatchStatus status = match.getStatus();
@@ -192,11 +183,7 @@ public class PlayerChannel
 		}
 	}
 	
-	/**
-	 * Send player's id to client  
-	 * 
-	 * @throws IOException
-	 */
+	/** Send player's id to client */
 	private void writePlayerId() throws IOException
 	{
 		writeMessage(MessageType.PLAYER_ID, this.player.getId());

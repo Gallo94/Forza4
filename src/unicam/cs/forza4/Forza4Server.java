@@ -11,7 +11,9 @@ import java.net.Socket;
  */
 public class Forza4Server
 {
+	/** Door's number of server socket */
 	public final static int PORT = 9001;
+	/** Maximum number of players */
 	public final static int MAX_NUM_PLAYER = 2;
 	
 	private Socket[] clients;

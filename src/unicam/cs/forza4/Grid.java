@@ -12,8 +12,11 @@ public class Grid implements Serializable
 {
 	private static final long serialVersionUID = -6825761503971516066L;
 	
+	/** Maximum number of discs */
 	public static final int MAX_DISCS = 42;
+	/** Number di rows in grid */
 	public static final int ROWS = 6;
+	/** Number di columns in grid */
 	public static final int COLUMNS = 7;
 	
 	private char[][] cells;
@@ -21,6 +24,7 @@ public class Grid implements Serializable
 	public static final char CIRCLE = 'O';
 	/** X's discs for player1 */
 	public static final char CROSS = 'X';
+	/** Empty grid cell */
 	public static final char EMPTY = ' ';
 	
 	private int numDisc;

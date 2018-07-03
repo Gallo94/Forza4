@@ -3,7 +3,6 @@ package unicam.cs.forza4;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-/** Tests Draw and Win's types */
 public class GridTest
 {
 
@@ -11,7 +10,6 @@ public class GridTest
 	{
 	}
 	
-	/** Test Draw */
 	@Test
 	public void checkDrawTest()
 	{
@@ -81,7 +79,7 @@ public class GridTest
 
 		fail("checkDrawTest failed");
 	}
-	/** Test VerticalWin */
+
 	@Test
 	public void checkVerticalWinTest()
 	{
@@ -124,7 +122,6 @@ public class GridTest
 		}
 	}
 	
-	/** Test HorizontalWin */
 	@Test
 	public void checkHorizontalWinTest()
 	{
@@ -158,7 +155,6 @@ public class GridTest
 		}
 	}
 	
-	/** Test DiagonalWin */
 	@Test
 	public void checkDiagonalWinTest()
 	{
