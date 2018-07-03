@@ -9,7 +9,6 @@ import java.util.ArrayList;
  */
 public class PlayerAI extends Player
 {
-	private static final long serialVersionUID = -8413214234228884030L;
 	/** If there are 3 discs in row of opponent */
 	public static final int MUST_WIN = 3;
 	/** If there are 2 discs in row of opponent */

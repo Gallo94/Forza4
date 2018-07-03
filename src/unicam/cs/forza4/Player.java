@@ -1,16 +1,12 @@
 package unicam.cs.forza4;
 
-import java.io.Serializable;
-
 /**
  * Rapresent the Player in game
  * 
  * @author Luca
  */
-public abstract class Player implements Serializable {
-
-	private static final long serialVersionUID = 3324651541378196476L;
-
+public abstract class Player 
+{
 	protected String name;
 	protected int id;
 

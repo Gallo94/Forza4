@@ -9,8 +9,6 @@ import java.util.Scanner;
  */
 public class PlayerHuman extends Player
 {	
-	private static final long serialVersionUID = -1496290258391331642L;
-
 	/**
 	 * Create a human player
 	 * 
