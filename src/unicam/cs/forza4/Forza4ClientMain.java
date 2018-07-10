@@ -24,6 +24,7 @@ public class Forza4ClientMain
 	public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException
 	{
 		server = InetAddress.getByName("localhost");
+		clientMode = ClientMode.HUMAN;
 		
 		parseCommandLine(args);
 		

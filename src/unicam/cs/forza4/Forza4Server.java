@@ -93,7 +93,7 @@ public class Forza4Server
 		@Override
 		public void run()
 		{
-			System.out.println("Connected with " +  this.player.getName());
+			System.out.println("Connected with Player " + this.player.getId());
 			
 			new PlayerChannel(this.client, this.player, this.match).start();
 		}
