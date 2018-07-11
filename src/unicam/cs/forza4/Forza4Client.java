@@ -43,7 +43,8 @@ public class Forza4Client
 		}
 		catch (ClassNotFoundException | IOException e)
 		{
-			e.printStackTrace();
+			System.out.print("Server not found");
+			System.exit(-1);
 		}
 	}
 	
@@ -71,44 +72,28 @@ public class Forza4Client
 						id = imsg.getData();
 						if (id == player.getId())
 						{		
-							try
-							{
-								boolean isValid = false;
-								PrintUtils.printGrid(System.out, grid);
-								int input = player.input(this.grid);
-								
-								writeMessage(MessageType.PLAYER_MOVE, input);								
-								Message returnMessage = readMessage();
-								
-								this.grid = readGrid();
-								PrintUtils.printGrid(System.out, grid);
+							boolean isValid = false;
+							PrintUtils.printGrid(System.out, grid);
+							int input = player.input(this.grid);
+							
+							writeMessage(MessageType.PLAYER_MOVE, input);								
+							Message returnMessage = readMessage();
+							
+							this.grid = readGrid();
+							PrintUtils.printGrid(System.out, grid);
 
-								if (returnMessage.getType() == MessageType.VALID_PLAY)
-								{
-									isValid = returnMessage.getData() == 1 ? true : false;
-									if (!isValid)
-										System.out.println("Bad play");
-								}
-								
-								System.out.println("Wait your turn!");
-							}
-							catch (IOException e)
+							if (returnMessage.getType() == MessageType.VALID_PLAY)
 							{
-								e.printStackTrace();
-								System.exit(-1);
+								isValid = returnMessage.getData() == 1 ? true : false;
+								if (!isValid)
+									System.out.println("Bad play");
 							}
+							
+							System.out.println("Wait your turn!");
 						}
 						else
 						{
-							try
-							{
-								writeMessage(MessageType.PLAYER_WAIT, 0);
-							}
-							catch (IOException e)
-							{
-								e.printStackTrace();
-								System.exit(-1);
-							}
+							writeMessage(MessageType.PLAYER_WAIT, 0);
 						}
 						
 						break;
@@ -135,7 +120,8 @@ public class Forza4Client
 			}
 			catch (IOException | ClassNotFoundException e)
 			{
-				e.printStackTrace();
+				System.out.print("Server disconnected");
+				System.exit(-1);
 			}
 		}
 		
@@ -153,7 +139,9 @@ public class Forza4Client
 		socket = new Socket(server, PORT);
 		
 		int playerId = readPlayerId();
-		this.player = (this.mode == ClientMode.HUMAN) ? new PlayerHuman(playerId) : new PlayerAI(playerId);
+		IPlayerFactory factory = (mode, id) -> (mode == ClientMode.AI ? new PlayerAI(id) : new PlayerHuman(id));
+		this.player = factory.getPlayer(this.mode, playerId);
+		
 		System.out.println("Player ID: " + this.player.getId());
 	}
 	

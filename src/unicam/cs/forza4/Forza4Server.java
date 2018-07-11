@@ -65,7 +65,7 @@ public class Forza4Server
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	

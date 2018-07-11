@@ -57,12 +57,11 @@ public class PlayerChannel
 				
 				processPlayerInput();
 			}
-
-//			this.socket.close();
 		}
 		catch (IOException | ClassNotFoundException e)
 		{
-			e.printStackTrace();
+			System.out.println("Client disconnected");
+			System.exit(-1);
 		}
 	}
 	
@@ -82,8 +81,8 @@ public class PlayerChannel
 		}
 		catch (IOException e)
 		{
-			System.out.println("PlayerChannel: Wrong read message");
-			throw e;
+			System.out.println("PlayerChannel: Wrong message read");
+			System.exit(-1);
 		}
 
 		return message;
