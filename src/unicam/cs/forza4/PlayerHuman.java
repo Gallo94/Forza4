@@ -2,11 +2,7 @@ package unicam.cs.forza4;
 
 import java.util.Scanner;
 
-/**
- * Human player
- * 
- * @author Luca
- */
+/** Human player */
 public class PlayerHuman extends Player
 {	
 	/**
@@ -40,10 +36,7 @@ public class PlayerHuman extends Player
 				System.out.println("Enter the correct number in range");
 		}
 		while (value < 0 || value > 6);
-		
-//		FIXME: close scanner
-//		scanner.close();
-		
+
 		return value;
 	}
 }

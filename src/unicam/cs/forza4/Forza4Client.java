@@ -8,11 +8,7 @@ import java.net.UnknownHostException;
 
 import unicam.cs.forza4.Forza4ClientMain.ClientMode;
 
-/**
- * Forza4Client represent the game client. It manages connection to server and communication mechanics   
- * 
- * @author gall9
- */
+/** Forza4Client represent the game client. It manages connection to server and communication mechanics */
 public class Forza4Client
 {
 	/** Door's number of client socket */
@@ -48,9 +44,7 @@ public class Forza4Client
 		}
 	}
 	
-	/**
-	 * Start the client. This is the communication loop
-	 */
+	/** Start the client. This is the communication loop */
 	public void start() throws IOException, ClassNotFoundException
 	{
 		boolean gameOver = false;
@@ -140,7 +134,7 @@ public class Forza4Client
 		
 		int playerId = readPlayerId();
 		IPlayerFactory factory = (mode, id) -> (mode == ClientMode.AI ? new PlayerAI(id) : new PlayerHuman(id));
-		this.player = factory.getPlayer(this.mode, playerId);
+		this.player = factory.createPlayer(this.mode, playerId);
 		
 		System.out.println("Player ID: " + this.player.getId());
 	}

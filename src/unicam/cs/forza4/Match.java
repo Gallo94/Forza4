@@ -2,11 +2,7 @@ package unicam.cs.forza4;
 
 import java.util.Random;
 
-/**
- * Match manages game states
- * 
- * @author Luca
- */
+/** Match manages game states */
 public class Match
 {
 	/** MatchStatus represent each possible game state */

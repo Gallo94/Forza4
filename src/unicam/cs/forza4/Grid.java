@@ -3,11 +3,7 @@ package unicam.cs.forza4;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Grid represent the game's grid
- * 
- * @author gall9
- */
+/** Grid represent the game's grid */
 public class Grid implements Serializable
 {
 	private static final long serialVersionUID = -6825761503971516066L;
@@ -127,9 +123,7 @@ public class Grid implements Serializable
 		return checkVerticalWin(player, row, col) || checkHorizontalWin(player, row, col) || checkDiagonals(player, row, col);
 	}
 	
-	/**
-	 * See {@link #checkWin(int, int, int)}
-	 */
+	/** See {@link #checkWin(int, int, int)} */
 	private boolean checkVerticalWin(final int player, final int row, final int col)
 	{
 		// Vertical check
@@ -150,9 +144,7 @@ public class Grid implements Serializable
 		return false;
 	}
 	
-	/**
-	 * See {@link #checkWin(int, int, int)}
-	 */
+	/** See {@link #checkWin(int, int, int)} */
 	private boolean checkHorizontalWin(final int player, final int row, final int col)
 	{
 		// Check last position to left
@@ -188,9 +180,7 @@ public class Grid implements Serializable
 		return false;
 	}
 	
-	/**
-	 * See {@link #checkWin(int, int, int)}
-	 */
+	/** See {@link #checkWin(int, int, int)} */
 	private boolean checkDiagonals(final int player, final int row, final int col)
 	{	
 		// from top-right to bottom-left

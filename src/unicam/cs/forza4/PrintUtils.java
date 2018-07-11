@@ -2,11 +2,7 @@ package unicam.cs.forza4;
 
 import java.io.PrintStream;
 
-/**
- * Print match's grid
- * 
- * @author Luca
- */
+/** Print match's grid */
 public class PrintUtils
 {
 	/** Reset escape character */

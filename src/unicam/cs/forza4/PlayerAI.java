@@ -2,11 +2,7 @@ package unicam.cs.forza4;
 
 import java.util.ArrayList;
 
-/**
- * Player AI
- * 
- * @author gall9
- */
+/** Player AI */
 public class PlayerAI extends Player
 {
 	/** column weight */

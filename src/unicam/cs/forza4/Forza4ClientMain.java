@@ -10,11 +10,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
 
-/**
- * Client application bootstrap
- * 
- * @author gall9
- */
+/** Client application bootstrap */
 public class Forza4ClientMain 
 {
 	private static InetAddress server;
