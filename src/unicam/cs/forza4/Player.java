@@ -3,7 +3,6 @@ package unicam.cs.forza4;
 /** Player */
 public abstract class Player 
 {
-	protected String name;
 	protected int id;
 
 	/**
@@ -13,7 +12,6 @@ public abstract class Player
 	 */
 	public Player(final int id)
 	{
-		this.name = String.valueOf(id);
 		this.id = id;
 	}
 
