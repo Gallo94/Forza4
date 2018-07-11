@@ -31,16 +31,6 @@ public abstract class Player
 		return this.id;
 	}
 
-//	/**
-//	 * Get player's name
-//	 * 
-//	 * @return player's name
-//	 */
-//	public String getName()
-//	{
-//		return this.name;
-//	}
-
 	/**
 	 * Place the disc in the grid's column
 	 * 
