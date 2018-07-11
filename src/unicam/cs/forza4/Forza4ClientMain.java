@@ -13,8 +13,11 @@ import org.apache.commons.cli.ParseException;
 /** Client application bootstrap */
 public class Forza4ClientMain 
 {
+	/** IP Address Server */
 	private static InetAddress server;
+	/** GameMode */
 	public enum ClientMode { HUMAN,	AI }
+	/** GameMode */
 	private static ClientMode clientMode;
 	
 	public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException

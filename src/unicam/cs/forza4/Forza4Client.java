@@ -13,9 +13,13 @@ public class Forza4Client
 {
 	/** Door's number of client socket */
 	public static final int PORT = 9001;
+	/** Socket use to connection */
 	private Socket socket = null;
+	/** Player of the game */
 	private Player player;
+	/** Grid of the game */
 	private Grid grid;
+	/** GameMode: Human or AI */
 	private ClientMode mode;
 
 	// Message attributes

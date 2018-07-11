@@ -14,10 +14,13 @@ public class Forza4Server
 	public final static int PORT = 9001;
 	/** Maximum number of players */
 	public final static int MAX_NUM_PLAYER = 2;
-	
+	/** Client's Socket */
 	private Socket[] clients;
+	/** Players of the game */
 	private Player[] players;
+	/** Initial number of players */
 	private int numPlayers = 0;
+	/** Match */
 	private Match match;
 	
 	/** Constructor */

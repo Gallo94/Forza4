@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /** Grid represent the game's grid */
 public class Grid implements Serializable
 {
+	/** ID Serializable */
 	private static final long serialVersionUID = -6825761503971516066L;
 	
 	/** Maximum number of discs */
@@ -15,6 +16,7 @@ public class Grid implements Serializable
 	/** Number di columns in grid */
 	public static final int COLUMNS = 7;
 	
+	/** Grid's Cells */
 	private char[][] cells;
 	/** O's discs for player0 */
 	public static final char CIRCLE = 'O';
@@ -23,7 +25,9 @@ public class Grid implements Serializable
 	/** Empty grid cell */
 	public static final char EMPTY = ' ';
 	
+	/** Number of the discs */
 	private int numDisc;
+	/** Victory */
 	public boolean won;
 	
 	
