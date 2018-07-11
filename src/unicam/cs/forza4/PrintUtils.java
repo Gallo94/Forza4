@@ -10,11 +10,11 @@ import java.io.PrintStream;
 public class PrintUtils
 {
 	/** Reset escape character */
-	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_RESET = "\u001b[0m";
 	/** Bright red escape character */
-	public static final String ANSI_RED = "\u001b[41;1m";
+	public static final String ANSI_RED = "\u001b[31;1m";
 	/** Bright green escape character */
-	public static final String ANSI_GREEN = "\u001b[42;1m";
+	public static final String ANSI_GREEN = "\u001b[32;1m";
 	
 	/**
 	 * Print grid
