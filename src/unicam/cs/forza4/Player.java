@@ -1,13 +1,9 @@
 package unicam.cs.forza4;
 
-/**
- * Player
- * 
- * @author Luca
- */
+/** Player */
 public abstract class Player 
 {
-	protected String name;		// FIXME
+	protected String name;
 	protected int id;
 
 	/**

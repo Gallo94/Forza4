@@ -8,11 +8,7 @@ import java.net.Socket;
 import unicam.cs.forza4.Message;
 import unicam.cs.forza4.Match.MatchStatus;
 
-/**
- * A communication's channel between server and client 
- * 
- * @author Luca
- */
+/** A communication's channel between server and client */
 public class PlayerChannel
 {	
 	public final static int MAX_MESSAGE_LEN = 2;
@@ -129,12 +125,10 @@ public class PlayerChannel
 			
 			if (success)
 				match.switchTurn();
-		
 			break;
 		}
 		case MessageType.PLAYER_WAIT:
 			// do nothing
-
 			break;
 		}
 	}

@@ -7,7 +7,6 @@ import java.net.Socket;
 /**
  * Forza4Server represent the game server. It accepts connection from clients,
  * communication mechanics and states synchronization.
- * @author gall9
  */
 public class Forza4Server
 {

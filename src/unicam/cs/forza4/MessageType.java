@@ -1,10 +1,6 @@
 package unicam.cs.forza4;
 
-/**
- * Represents the messages from server to client and the other way
- * 
- * @author Luca
- */
+/** Represents the messages from server to client and the other way */
 public class MessageType
 {
 	// Message: server to client
