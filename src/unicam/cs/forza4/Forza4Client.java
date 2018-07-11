@@ -19,7 +19,7 @@ public class Forza4Client
 	private Player player;
 	/** Grid of the game */
 	private Grid grid;
-	/** GameMode: Human or AI */
+	/** Choose mode to play: Human or AI */
 	private ClientMode mode;
 
 	// Message attributes

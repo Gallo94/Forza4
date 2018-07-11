@@ -16,7 +16,7 @@ public class Grid implements Serializable
 	/** Number di columns in grid */
 	public static final int COLUMNS = 7;
 	
-	/** Grid's Cells */
+	/** Grid's cells */
 	private char[][] cells;
 	/** O's discs for player0 */
 	public static final char CIRCLE = 'O';

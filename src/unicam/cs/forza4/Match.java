@@ -8,17 +8,27 @@ public class Match
 	/** MatchStatus represent each possible game state */
 	enum MatchStatus
 	{
+		/** Idle status */
 		IDLE,
+		/** Turn of the player0 */
 		P0_TURN,
+		/** Turn of the player1 */
 		P1_TURN,
+		/** Player0 won */
 		P0_WON,
+		/** Player1 won */
 		P1_WON,
+		/** Draw */
 		DRAW
 	}
 
+	/** Game's grid */
 	private Grid grid;
+	/** Initial state of the match */
 	MatchStatus status = MatchStatus.IDLE;
+	/** Current player */
 	private int curPlayer;
+	/** Winning player */
 	private int winPlayer;
 	
 	/** Constructor */

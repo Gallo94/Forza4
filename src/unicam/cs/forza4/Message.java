@@ -5,9 +5,11 @@ import java.io.Serializable;
 /** Message is the basic unit for communicating between client and server */
 public class Message implements Serializable
 {
+	/** ID Serializable */
 	private static final long serialVersionUID = 7097116029864916962L;
-	
+	/** Message's type */
 	private int type;
+	/** Message's data */
 	private int data;
 	
 	/**

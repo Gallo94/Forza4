@@ -3,6 +3,7 @@ package unicam.cs.forza4;
 /** Player */
 public abstract class Player 
 {
+	/** Player's id */
 	protected int id;
 
 	/**
