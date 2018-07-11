@@ -22,6 +22,7 @@ public class Forza4Client
 	/** Choose mode to play: Human or AI */
 	private ClientMode mode;
 
+	/** Max lenght message */
 	// Message attributes
 	public final static int MAX_MESSAGE_LEN = 2;
 	

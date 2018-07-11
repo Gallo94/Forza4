@@ -11,7 +11,7 @@ import unicam.cs.forza4.Match.MatchStatus;
 /** A communication's channel between server and client */
 public class PlayerChannel
 {	
-	/** Max lenght of messages */
+	/** Max lenght of message */
 	public final static int MAX_MESSAGE_LEN = 2;
 	/** Server's socket */
 	private Socket socket;

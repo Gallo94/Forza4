@@ -21,6 +21,7 @@ public class PlayerHuman extends Player
 	{
 		System.out.println("Your turn!");
 		System.out.println("Insert column between 0-6: ");
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		int value;
 		do

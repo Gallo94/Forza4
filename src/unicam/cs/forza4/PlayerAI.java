@@ -5,11 +5,11 @@ import java.util.ArrayList;
 /** Player AI */
 public class PlayerAI extends Player
 {
-	/** column weight */
+	/** Column weight to win */
 	public static final int MUST_WIN = 3;
-	/** column weight */
+	/** Column weight to block */
 	public static final int MUST_BLOCK = 2;
-	/** column weight */
+	/** Column weight to normal move*/
 	public static final int NORMAL = 1;
 	
 	/**
