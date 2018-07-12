@@ -44,7 +44,7 @@ public class Forza4Client
 		}
 		catch (ClassNotFoundException | IOException e)
 		{
-			System.out.print("Server not found");
+			System.out.print("Server not found or busy");
 			System.exit(-1);
 		}
 	}
@@ -142,6 +142,7 @@ public class Forza4Client
 		this.player = factory.createPlayer(this.mode, playerId);
 		
 		System.out.println("Player ID: " + this.player.getId());
+		System.out.println("ciao");
 	}
 	
 	/**

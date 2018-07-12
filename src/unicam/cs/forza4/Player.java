@@ -42,7 +42,7 @@ public abstract class Player
 	 * Returns a input from player.
 	 * Must be overridden by inherited class
 	 * 
-	 * @param grid
+	 * @param grid game's grid
 	 * @return player's input
 	 */
 	public abstract int input(final Grid grid);

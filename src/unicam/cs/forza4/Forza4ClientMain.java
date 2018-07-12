@@ -61,7 +61,7 @@ public class Forza4ClientMain
 
 			if (cmd.hasOption("help"))
 			{
-				System.out.println("Usage: Connect4Client [-server <server_ip>][-mode <mode>][-help]");
+				System.out.println("Usage: Forza4Client [-server <server_ip>][-mode <mode>][-help]");
 				System.out.println();
 				System.out.println("Default server_ip is localhost (127.0.0.1)");
 				System.out.println();
@@ -69,7 +69,7 @@ public class Forza4ClientMain
 				System.out.println("- human");
 				System.out.println("- ai");
 				System.out.println();
-				System.out.println("Connect4Client -help show this");
+				System.out.println("Forza4Client -help show this");
 				System.exit(0);
 			}
 			
@@ -85,7 +85,7 @@ public class Forza4ClientMain
 					clientMode = ClientMode.AI;
 				else
 				{
-					System.err.println("Usage: Connect4Client [-server <server_ip>][-mode <mode>][-help]");
+					System.err.println("Usage: Forza4Client [-server <server_ip>][-mode <mode>][-help]");
 					System.exit(-1);
 				}
 			}
@@ -97,7 +97,7 @@ public class Forza4ClientMain
         catch (ParseException e)
         {
 			System.err.println("Wrong parameter");
-			System.err.println("Usage: Connect4Client [-server <server_ip>][-mode <mode>][-help]");
+			System.err.println("Usage: Forza4Client [-server <server_ip>][-mode <mode>][-help]");
 			System.exit(-1);
 		}
         catch (UnknownHostException e)
