@@ -142,7 +142,6 @@ public class Forza4Client
 		this.player = factory.createPlayer(this.mode, playerId);
 		
 		System.out.println("Player ID: " + this.player.getId());
-		System.out.println("ciao");
 	}
 	
 	/**
