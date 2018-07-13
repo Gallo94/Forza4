@@ -172,11 +172,11 @@ public class Grid implements Serializable
 			if (!isIndexInBound(row, col + i))
 				break;
 			
-			if (getPlayerDisc(player) != this.cells[row][col + i]) // FIXME
+			if (getPlayerDisc(player) != this.cells[row][col + i])
 				break;
 			
 			numDisc++;
-			if (numDisc == 4)
+			if (numDisc >= 4)
 				return true;
 			
 		}
